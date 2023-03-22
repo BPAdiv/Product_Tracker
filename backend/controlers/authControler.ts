@@ -48,8 +48,10 @@ exports.verfiyToken = async (req: Request, res: Response) => {
   try {
     if (!token || !userId)
       return res.status(400).json({ message: "Token or User Id is missing" });
-    const decoded = jwt.verify(token, process.env.JWT_ || "");
-    if (decoded.id != userId)
+
+    const decoded = jwt.verify(token, process.env.JWT || "");
+
+    if ((decoded as { id: string }).id != userId)
       return res.status(400).json({ message: "Invalid Token or User Id" });
     const user = await User.findById(userId);
     if (!user) return res.status(400).json({ message: "User does not exist" });
