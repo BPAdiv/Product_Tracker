@@ -62,3 +62,5 @@ async function getProducts() {
   console.log(product);
 }
 getProducts();
+
+// https://www.amazon.com/gp/aod/ajax/?asin=B097T276QL&m=&smid=&sourcecustomerorglistid=&sourcecustomerorglistitemid=&sr=8-5&pc=dp
