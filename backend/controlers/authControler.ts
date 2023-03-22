@@ -8,7 +8,7 @@ import jwt, { JwtPayload, Secret } from "jsonwebtoken";
 // const bcrypt = require("bcrypt");
 // const jwt = require("jsonwebtoken");
 
-exports.register = async (req: Request, res: Response) => {
+export const register = async (req: Request, res: Response) => {
   try {
     const { email, password, userName } = req.body;
     const hash = await bcrypt.hash(password, 10);
@@ -23,7 +23,7 @@ exports.register = async (req: Request, res: Response) => {
   }
 };
 
-exports.login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response) => {
   try {
     const loginUser = await User.findOne({ email: req.body.email });
     if (!loginUser)
@@ -41,7 +41,7 @@ exports.login = async (req: Request, res: Response) => {
   }
 };
 
-exports.verfiyToken = async (req: Request, res: Response) => {
+export const verfiyToken = async (req: Request, res: Response) => {
   const token = req.body.token;
   const userId = req.body.userId;
 

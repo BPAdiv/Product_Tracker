@@ -1,5 +1,5 @@
 // const mongoose = require("mongoose");
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
   role: { type: String, default: "user" },
   phoneNumber: { type: String },
   country: { type: String },
-  products: [{ type: mongoose.Types.ObjectId, ref: "TrackProduct" }],
+  products: [{ type: Schema.Types.ObjectId, ref: "TrackProduct" }],
 });
 
 export default mongoose.model("TrackUser", UserSchema);

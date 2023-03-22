@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose, { Schema } from "mongoose";
 
 const ProductSchema = new mongoose.Schema({
   link: { type: String, required: true },
@@ -12,6 +12,6 @@ const ProductSchema = new mongoose.Schema({
   category: { type: String },
   company: { type: String },
   country: { type: String },
-  followers: [{ type: mongoose.Types.ObjectId, ref: "TrackUser" }],
+  followers: [{ type: Schema.Types.ObjectId, ref: "TrackUser" }],
 });
-module.exports = mongoose.model("TrackProduct", ProductSchema);
+export default mongoose.model("TrackProduct", ProductSchema);

@@ -1,6 +1,8 @@
+import { ObjectId } from "mongoose";
+
 export interface IProduct {
   link: string;
-  targetPrice: string;
+  targetPrice: number;
   image?: string;
   title?: string;
   previousPrice?: number;
@@ -10,7 +12,7 @@ export interface IProduct {
   category?: string;
   company?: string;
   country?: string;
-  followers?: IUser[];
+  followers?: import("mongoose").Types.ObjectId[];
 }
 
 export interface IUser {
@@ -21,5 +23,5 @@ export interface IUser {
   role?: string;
   phoneNumber?: string;
   country?: string;
-  products?: IProduct[];
+  products?: import("mongoose").Types.ObjectId[];
 }

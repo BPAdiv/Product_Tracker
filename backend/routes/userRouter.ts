@@ -1,19 +1,9 @@
 import express from "express";
+import { register, login, verfiyToken } from "../controlers/authControler";
 const userRouter = express.Router();
-const {
-  register,
-  login,
-  verfiyToken,
-  // auth,
-  // getMyInfo
-} = require("../controlers/authControler");
 
-userRouter.post("/register", register);
+userRouter.post("/signup", register);
 userRouter.post("/login", login);
-// userRouter.post("/updateList", updateChecklist);
-// userRouter.post("/login", login);
-// userRouter.post("/auth", auth);
-// userRouter.post("/profile/:username", getMyInfo);
+userRouter.post("/auth", verfiyToken);
 
-// module.exports = userRouter;
 export default userRouter;
