@@ -1,8 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const ProductSchema = new mongoose.Schema({
-  link: { type: String, required: true },
-  targetPrice: { type: Number, required: true },
+  productAsin: { type: String, required: true },
   image: { type: String },
   title: { type: String },
   previousPrice: { type: Number },
@@ -12,6 +11,11 @@ const ProductSchema = new mongoose.Schema({
   category: { type: String },
   company: { type: String },
   country: { type: String },
-  followers: [{ type: Schema.Types.ObjectId, ref: "TrackUser" }],
+  followers: [
+    {
+      userId: { type: Schema.Types.ObjectId, ref: "TrackUser", required: true },
+      targetPrice: { type: Number, required: true },
+    },
+  ],
 });
 export default mongoose.model("TrackProduct", ProductSchema);

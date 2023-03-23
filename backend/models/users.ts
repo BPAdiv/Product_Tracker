@@ -9,7 +9,6 @@ const UserSchema = new mongoose.Schema({
   role: { type: String, default: "user" },
   phoneNumber: { type: String },
   country: { type: String },
-  products: [{ type: Schema.Types.ObjectId, ref: "TrackProduct" }],
 });
 
 export default mongoose.model("TrackUser", UserSchema);
