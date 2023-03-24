@@ -2,10 +2,11 @@ import TelegramBot from "node-telegram-bot-api";
 import { globalLink } from "../controlers/productController";
 import { IFollowUser, IProduct } from "./types";
 import ReplyManager from "node-telegram-operation-manager";
+require("dotenv").config();
 
 // const reply =new ReplyManager.ReplyManager()
 
-const telegramToken: string = "6127821819:AAESYHSZIET443ojI0elxFQnrrg4yNWjSg4";
+const telegramToken = process.env.BOT as string;
 
 const bot = new TelegramBot(telegramToken, { polling: true });
 
@@ -19,17 +20,15 @@ export const activateBot = () => {
   bot.onText(/\/login/, (msg) => {
     console.log(msg);
     //check email address
-    bot
-      .sendMessage("1412063297", "Please enter you email")
-      .then((sentMessage) => {
-        bot.onReplyToMessage(
-          sentMessage.chat.id,
-          sentMessage.message_id,
-          (reply) => {
-            console.log(reply);
-          }
-        );
-      });
+    bot.sendMessage("chatID", "Please enter you email").then((sentMessage) => {
+      bot.onReplyToMessage(
+        sentMessage.chat.id,
+        sentMessage.message_id,
+        (reply) => {
+          console.log(reply);
+        }
+      );
+    });
     // reply.register("1412063297",(result)=>{
 
     // });
