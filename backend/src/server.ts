@@ -10,13 +10,15 @@ import cheerio from "cheerio";
 import productRouter from "../routes/productRouter";
 
 import { getAmazonLinks } from "./cheerio/amazonTrack";
+import { activateBot } from "./telegramBot";
 
 const app = express();
 // connect to db (mongodb + mongoose)
 mongoose
   .connect(process.env.MONGO as string, {})
   .then(() => {
-    getAmazonLinks();
+    // getAmazonLinks();
+    activateBot();
     console.log("connected");
   })
   .catch((err: any) => {

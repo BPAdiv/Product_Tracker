@@ -4,13 +4,34 @@ import products from "../../models/products";
 import Product from "../../models/products";
 import { IProduct } from ".././types";
 import { globalLink } from "../../controlers/productController";
+import { sendMessageBot } from "../telegramBot";
+
+const isPriceLower = (wholePrice: string, targetProduct: IProduct) => {
+  const { productAsin, followers, _id } = targetProduct;
+  const currentPrice = wholePrice.replace("$", "");
+  const numberCurrentPrice = parseInt(currentPrice);
+
+  followers.forEach((follow) => {
+    if (numberCurrentPrice > follow.targetPrice) {
+      console.log(
+        "price lower: " + numberCurrentPrice,
+        " target: " + targetProduct.productAsin,
+        "targetPrice: " + follow.targetPrice
+      );
+      sendMessageBot(targetProduct, follow, wholePrice);
+    } else {
+      console.log("price not lower: " + follow.targetPrice);
+    }
+  });
+};
 // let product:IProduct;
 
 async function getProducts(targetProduct: IProduct) {
   const { productAsin, followers } = targetProduct;
 
-  const product: IProduct = targetProduct;
-  const { data } = await axios.get(globalLink + "B07PXGQC1Q", {
+  const product = targetProduct;
+
+  const { data } = await axios.get(globalLink + productAsin, {
     headers: {
       "user-agent":
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36",
@@ -42,6 +63,7 @@ async function getProducts(targetProduct: IProduct) {
     precentageOff = $(
       "#corePriceDisplay_desktop_feature_div > div.a-section.a-spacing-none.aok-align-center > span.a-size-large.a-color-price.savingPriceOverride.aok-align-center.reinventPriceSavingsPercentageMargin.savingsPercentage"
     ).text();
+    isPriceLower(wholePrice, targetProduct);
   }
 
   //second optin price regular
@@ -88,11 +110,11 @@ async function getProducts(targetProduct: IProduct) {
 
 export const getAmazonLinks = async () => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().populate("followers.userId");
     if (!products) {
       return "has been error finding products links";
     }
-    const promises = products.map((element: IProduct) => {
+    const promises = products.map((element) => {
       return getProducts(element);
     });
     await Promise.all(promises);
