@@ -31,6 +31,13 @@ app.use(express.json());
 
 app.use("/api/user", userRouter);
 app.use("/api/product", productRouter);
+app.post("/webhook", (req, res) => {
+  const { message } = req.body;
+  console.log(message);
+
+  // process the message received from Telegram
+  // authenticate the user on your website and allow them to access the website's features
+});
 
 app.listen(8000, () => console.log("listen on port 8000"));
 

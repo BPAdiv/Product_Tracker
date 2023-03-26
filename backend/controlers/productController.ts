@@ -25,17 +25,20 @@ export const verifyProduct = async (req: Request, res: Response) => {
   if (!productAsin) res.status(404).json({ message: "product asin not found" });
 
   try {
-    const { data } = await axios.get(globalLink + productAsin, {
-      headers: {
-        "user-agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36",
-        "sec-ch-ua-platform": "Windows",
-        pragma: "no-cache",
-        accept: "text/html,/",
-        "x-requested-with": "XMLHttpRequest",
-        host: "www.amazon.com",
-      },
-    });
+    const { data } = await axios.get(
+      `${globalLink + productAsin}?&language=en_US`,
+      {
+        headers: {
+          "user-agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36",
+          "sec-ch-ua-platform": "Windows",
+          pragma: "no-cache",
+          accept: "text/html,/",
+          "x-requested-with": "XMLHttpRequest",
+          host: "www.amazon.com",
+        },
+      }
+    );
     const $ = cheerio.load(data);
     const productTitle = $("#productTitle").text().trim();
     const productImage = $("#landingImage").attr("src");
@@ -74,6 +77,7 @@ export const followProduct = async (req: Request, res: Response) => {
     productImage,
     userId,
     productAsin,
+    currentPrice,
   } = req.body;
   if (!productAsin || !targetPrice || !userId) {
     return res
@@ -89,7 +93,8 @@ export const followProduct = async (req: Request, res: Response) => {
     const checkProduct = await Product.findOne({ productAsin: productAsin });
     if (checkProduct) {
       checkProduct.followers.push({ userId, targetPrice });
-
+      checkProduct.currentPrice = currentPrice;
+      checkProduct.lastUpdated = new Date();
       // user.products.push(checkProduct._id);
       const savedCheckProduct = await checkProduct.save();
       // const savedUser = await user.save();
@@ -107,10 +112,13 @@ export const followProduct = async (req: Request, res: Response) => {
       productAsin,
       title: productTitle,
       image: productImage,
+      currentPrice,
+      lastUpdated: new Date(),
       createdAt: new Date(),
     });
 
     newFollow.followers.push({ userId, targetPrice });
+
     // user.products.push(newFollow._id);
     const savedFollow = await newFollow.save();
     // const savedUser = await user.save();
@@ -179,14 +187,6 @@ export const removeFollow = async (req: Request, res: Response) => {
       .json({ message: " There is  No Product ID or userId" });
   }
   try {
-    // const user = await User.findById(userId).populate("products");
-    // if (!user) {
-    //   return res.status(400).json({ message: "user have not been found" });
-    // }
-
-    // user.products = user.products.filter(
-    //   (obgId) => obgId._id.toString() !== productId
-    // );
     const unFolloweProduct = await Product.findById(productId);
     if (!unFolloweProduct) {
       return res.status(400).json({ message: "could not find product" });

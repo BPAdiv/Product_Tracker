@@ -19,10 +19,10 @@ export interface IProduct {
   productAsin: string;
   image?: string;
   title?: string;
-  previousPrice?: number;
-  salePrice?: number;
+  previousPrice?: string;
+  currentPrice?: string;
   createdAt: Date;
-  saleDate?: Date;
+  lastUpdated?: Date;
   category?: string;
   company?: string;
   country?: string;

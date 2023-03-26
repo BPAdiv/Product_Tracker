@@ -7,11 +7,18 @@ import "./index.css";
 import ErrorPage from "./general/ErrorPage";
 import ProductPage from "./product/ProductPage";
 import UserPage from "./user/UserPage";
+import LoginPage from "./login/LoginPage";
+import UserProvider from "./contexts/userContext";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/account/login",
+    element: <LoginPage />,
     errorElement: <ErrorPage />,
   },
   {
@@ -27,6 +34,8 @@ const router = createBrowserRouter([
 ]);
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </React.StrictMode>
 );

@@ -49,7 +49,7 @@ export const verfiyToken = async (req: Request, res: Response) => {
     if (!token || !userId)
       return res.status(400).json({ message: "Token or User Id is missing" });
 
-    const decoded = jwt.verify(token, process.env.JWT || "");
+    const decoded = jwt.verify(token, process.env.JWT_ || "");
 
     if ((decoded as { id: string }).id != userId)
       return res.status(400).json({ message: "Invalid Token or User Id" });

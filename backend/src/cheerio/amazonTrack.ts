@@ -1,10 +1,22 @@
 import axios from "axios";
 import cheerio from "cheerio";
-import products from "../../models/products";
 import Product from "../../models/products";
 import { IProduct } from ".././types";
 import { globalLink } from "../../controlers/productController";
 import { sendMessageBot } from "../telegramBot";
+
+const setCurrentPriceAndDate = (productAsin: string, currentPrice: string) => {
+  try {
+    const product = Product.findOneAndUpdate(
+      { productAsin },
+      { currentPrice, lastUpdated: new Date() }
+    );
+    if (!product) return console.log("couldnt find product");
+    console.log("product updated successful");
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};
 
 const isPriceLower = (wholePrice: string, targetProduct: IProduct) => {
   const { productAsin, followers, _id } = targetProduct;
@@ -12,7 +24,7 @@ const isPriceLower = (wholePrice: string, targetProduct: IProduct) => {
   const numberCurrentPrice = parseInt(currentPrice);
 
   followers.forEach((follow) => {
-    if (numberCurrentPrice > follow.targetPrice) {
+    if (numberCurrentPrice < follow.targetPrice) {
       console.log(
         "price lower: " + numberCurrentPrice,
         " target: " + targetProduct.productAsin,
@@ -23,25 +35,29 @@ const isPriceLower = (wholePrice: string, targetProduct: IProduct) => {
       console.log("price not lower: " + follow.targetPrice);
     }
   });
+  setCurrentPriceAndDate(productAsin, currentPrice);
 };
 // let product:IProduct;
 
 async function getProducts(targetProduct: IProduct) {
   const { productAsin, followers } = targetProduct;
 
-  const product = targetProduct;
+  // const product = targetProduct;
 
-  const { data } = await axios.get(globalLink + productAsin, {
-    headers: {
-      "user-agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36",
-      "sec-ch-ua-platform": "Windows",
-      pragma: "no-cache",
-      accept: "text/html,/",
-      "x-requested-with": "XMLHttpRequest",
-      host: "www.amazon.com",
-    },
-  });
+  const { data } = await axios.get(
+    `${globalLink + productAsin}?&language=en_US`,
+    {
+      headers: {
+        "user-agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36",
+        "sec-ch-ua-platform": "Windows",
+        pragma: "no-cache",
+        accept: "text/html,/",
+        "x-requested-with": "XMLHttpRequest",
+        host: "www.amazon.com",
+      },
+    }
+  );
 
   let previousPrice: string = "";
   let wholePrice: string = "";
@@ -63,7 +79,7 @@ async function getProducts(targetProduct: IProduct) {
     precentageOff = $(
       "#corePriceDisplay_desktop_feature_div > div.a-section.a-spacing-none.aok-align-center > span.a-size-large.a-color-price.savingPriceOverride.aok-align-center.reinventPriceSavingsPercentageMargin.savingsPercentage"
     ).text();
-    isPriceLower(wholePrice, targetProduct);
+    return isPriceLower(wholePrice, targetProduct);
   }
 
   //second optin price regular
@@ -76,6 +92,10 @@ async function getProducts(targetProduct: IProduct) {
       "#corePriceDisplay_desktop_feature_div > div.a-section.a-spacing-none.aok-align-center > span > span:nth-child(2)"
     ).text();
   }
+  if (wholePrice) {
+    return isPriceLower(wholePrice, targetProduct);
+  }
+
   //third option price is wierd
   if (!currentPrice) {
     console.log("there is no price to display the second option");
@@ -91,12 +111,14 @@ async function getProducts(targetProduct: IProduct) {
       ).text();
     }
   }
+  if (wholePrice) {
+    return isPriceLower(wholePrice, targetProduct);
+  }
   //product unavailable
   if (!currentPrice) {
     console.log("there is no price to display the third option");
     currentPrice = $("#availability > span").text().trim();
   }
-
   const num = parseInt(currentPrice);
   console.log({
     productAsin,
@@ -106,6 +128,7 @@ async function getProducts(targetProduct: IProduct) {
     previousPrice,
     precentageOff,
   });
+  setCurrentPriceAndDate(productAsin, currentPrice);
 }
 
 export const getAmazonLinks = async () => {
