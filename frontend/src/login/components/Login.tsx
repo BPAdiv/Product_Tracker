@@ -1,6 +1,13 @@
 import axios from "axios";
-import { SetStateAction, Dispatch, useState, useContext } from "react";
+import {
+  SetStateAction,
+  Dispatch,
+  useState,
+  useContext,
+  useEffect,
+} from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 import { UserContext } from "../../contexts/userContext";
 
 export interface ILoginProps {
@@ -9,6 +16,8 @@ export interface ILoginProps {
 }
 
 export default function Login(props: ILoginProps) {
+  const cookies = new Cookies();
+
   const { isLogin, setIsLogin } = props;
   const { user, setUser } = useContext(UserContext);
   const [email, setEmail] = useState("");
@@ -24,8 +33,10 @@ export default function Login(props: ILoginProps) {
       );
       console.log(data);
       setUser(data.data);
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("userId", data.data._id);
+      cookies.set("token", data.token, { path: "/" });
+
+      // localStorage.setItem("token", data.token);
+      // localStorage.setItem("userId", data.data._id);
 
       navigate("/");
     } catch (err) {

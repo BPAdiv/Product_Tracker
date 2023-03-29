@@ -19,12 +19,13 @@ const extractProductAsin = (productLink: string): string | boolean => {
 };
 
 export const verifyProduct = async (req: Request, res: Response) => {
-  const { productLink, targetPrice } = req.body;
-  if (!productLink) res.status(404).json({ message: "No link provided" });
-  const productAsin = extractProductAsin(productLink);
-  if (!productAsin) res.status(404).json({ message: "product asin not found" });
-
   try {
+    const { productLink, targetPrice } = req.body;
+    if (!productLink) res.status(404).json({ message: "No link provided" });
+    const productAsin = extractProductAsin(productLink);
+    if (!productAsin)
+      res.status(404).json({ message: "product asin not found" });
+
     const { data } = await axios.get(
       `${globalLink + productAsin}?&language=en_US`,
       {
@@ -62,10 +63,10 @@ export const verifyProduct = async (req: Request, res: Response) => {
       currentPrice,
     });
   } catch (error: any) {
+    console.log(error);
     res
       .status(500)
       .json({ message: error.message, link: "link might not be found" });
-    console.log(error);
   }
 };
 
@@ -147,13 +148,26 @@ export const getAllProducts = async (req: Request, res: Response) => {
     res.status(500).json({ message: error.message });
   }
 };
-export const getSingleProduct = async (req: Request, res: Response) => {
-  const { productId } = req.params;
+export const getUserProducts = async (req: Request, res: Response) => {
+  const { userId } = req.params;
   try {
-    const singleProduct = await Product.findOne({ _id: productId }).populate(
-      "followers.userId",
-      "-password -role"
-    );
+    const products = await Product.find({
+      "followers.userId": userId,
+    }).populate("followers.userId", "-password -role");
+    if (!products) {
+      return res.status(404).json({ message: "Couldn't find products" });
+    }
+    res.status(200).json({ products });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
+export const getSingleProduct = async (req: Request, res: Response) => {
+  const { productAsin } = req.params;
+  try {
+    const singleProduct = await Product.findOne({
+      productAsin: productAsin,
+    }).populate("followers.userId", "-password -role");
     if (!singleProduct) {
       return res.status(404).json({ message: "Couldn't find product" });
     }

@@ -7,8 +7,11 @@ import "./index.css";
 import ErrorPage from "./general/ErrorPage";
 import ProductPage from "./product/ProductPage";
 import UserPage from "./user/UserPage";
+// import UserHome from "./user/UserPage";
 import LoginPage from "./login/LoginPage";
 import UserProvider from "./contexts/userContext";
+import UserHome from "./user/UserHome";
+import FollowProductPage from "./followProduct/FollowProductPage";
 
 const router = createBrowserRouter([
   {
@@ -22,13 +25,18 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/product/:productId",
+    path: "/product/:productAsin",
     element: <ProductPage />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/user/:userId",
-    element: <UserPage />,
+    element: <UserHome />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/addProduct",
+    element: <FollowProductPage />,
     errorElement: <ErrorPage />,
   },
 ]);

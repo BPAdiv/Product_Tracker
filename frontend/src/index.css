@@ -1,9 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* @import "react-alice-carousel/lib/alice-carousel.css"; */
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+/* .alice-carousel__stage-item {
+  height: 500px;
+  min-height: max-content;
+} */
+.hey {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }

@@ -41,22 +41,72 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-export const verfiyToken = async (req: Request, res: Response) => {
-  const token = req.body.token;
-  const userId = req.body.userId;
+// export const verfiyToken = async (req: Request, res: Response) => {
+//   const token = req.body.token;
+//   const userId = req.body.userId;
+
+//   try {
+//     if (!token || !userId)
+//       return res.status(400).json({ message: "Token or User Id is missing" });
+
+//     const decoded = jwt.verify(token, process.env.JWT_ || "");
+
+//     if ((decoded as { id: string }).id != userId)
+//       return res.status(400).json({ message: "Invalid Token or User Id" });
+//     const user = await User.findById(userId);
+//     if (!user) return res.status(400).json({ message: "User does not exist" });
+//     res.status(200).json({ data: user });
+//   } catch (error: any) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+const checkToken = async (token:string) => {
+  try {
+    if (!token) return;
+    const decoded = jwt.verify(token, process.env.JWT_ || "");
+    if (!(decoded as { id: string }).id )
+    return ;
+    
+    // const { email } = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById((decoded as { id: string }).id);
+    if (!user) return
+    return user
+    
+  } catch (err:any) {
+    if (err.name === "TokenExpiredError") {
+      console.log("Token expired");
+    } else {
+      console.error(err);
+    }
+  }
+};
+export const verfiyToken = async (req:Request, res:Response) => {
+  const authorizationHeader = req.headers.authorization;
+
+  if (!authorizationHeader) {
+    return res.status(401).send({ message: "Unauthorized" });
+  }
+
+  const token = authorizationHeader.split(" ")[1];
 
   try {
-    if (!token || !userId)
-      return res.status(400).json({ message: "Token or User Id is missing" });
+    const user = await checkToken(token);
 
-    const decoded = jwt.verify(token, process.env.JWT_ || "");
+    // If the user is not found, return a 401 status
+    if (!user) {
+      return res.status(401).send({ message: "Unauthorized" });
+    }
 
-    if ((decoded as { id: string }).id != userId)
-      return res.status(400).json({ message: "Invalid Token or User Id" });
-    const user = await User.findById(userId);
-    if (!user) return res.status(400).json({ message: "User does not exist" });
-    res.status(200).json({ data: user });
-  } catch (error: any) {
-    res.status(500).json({ message: error.message });
+    // If the user is found, return the user data
+    // const { username, admin } = user;
+    // const { rows: rows3 } = await db.query(`SELECT * FROM favorite WHERE owner = $1`, [
+    //   username,
+    // ]);
+
+
+    res.status(200).json({ user});
+  } catch (error) {
+    // If the token is invalid, return a 401 status
+    return res.status(401).send({ message: "Unauthorized" });
   }
 };
