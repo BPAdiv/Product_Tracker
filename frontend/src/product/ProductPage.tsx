@@ -10,6 +10,7 @@ import ProductInfo from "./components/ProductInfo";
 
 export type ProductPageProps = {
   product: IProductProps | undefined;
+  sameCategory?: IProductProps[] | undefined;
 };
 
 export default function ProductPage() {
@@ -17,8 +18,15 @@ export default function ProductPage() {
   const [singleProduct, setSingleProduct] = useState<IProductProps | undefined>(
     undefined
   );
+  const [relatedProduct, setRelatedProduct] = useState<
+    IProductProps[] | undefined
+  >(undefined);
 
   useAuth();
+
+  const sameCategory = relatedProduct?.filter(
+    (pro) => pro.category === singleProduct?.category
+  );
 
   useEffect(() => {
     const getSingleProduct = async () => {
@@ -32,15 +40,38 @@ export default function ProductPage() {
         console.log(error);
       }
     };
+    const getRelatedProduct = async () => {
+      try {
+        const { data } = await axios.get(`http://localhost:8000/api/product`);
+        setRelatedProduct([...data.products]);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getRelatedProduct();
     getSingleProduct();
   }, []);
+  // useEffect(() => {
+  //   const getRelatedProduct = async () => {
+  //     try {
+  //       const { data } = await axios.get(`http://localhost:8000/api/product`);
+  //       // setRelatedProduct({ ...data.singleProduct });
+  //       console.log(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getRelatedProduct();
+  // }, [singleProduct]);
 
   return (
     <div>
       <NavBar />
+      {/* <div>{sameCategory.map((item) => item._id)}</div> */}
       <ProductInfo product={singleProduct} />
       <ProductChart product={singleProduct} />
-      <ProductCategory product={singleProduct} />
+      <ProductCategory product={singleProduct} sameCategory={relatedProduct} />
     </div>
   );
 }

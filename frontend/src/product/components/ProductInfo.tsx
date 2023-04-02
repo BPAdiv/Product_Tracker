@@ -7,15 +7,15 @@ import { format, render, cancel, register } from "timeago.js";
 
 export default function ProductInfo({ product }: ProductPageProps) {
   return (
-    <div className="flex flex-wrap  m-[10vw] gap-10  justify-center bg-white shadow-md rounded   p-5">
-      <div className="">
+    <div className="flex max-md:flex-col  flex-wrap  m-[10vw]  justify-between items-center  bg-white border-t-4  shadow-md rounded">
+      <div className="w-1/2 flex justify-center items-center p-10  max-md:w-full ">
         <img
-          className="max-w-[20rem] min-w-[10rem] w-full object-contain"
+          className="max-w-[20rem]   w-full object-contain"
           src={product?.image}
           alt=""
         />
       </div>
-      <div className=" flex flex-col max-w-3xl text-xl max-sm:text-base gap-5 px-5">
+      <div className=" flex flex-col  w-1/2 text-xl max-sm:text-base gap-5 p-10  max-md:w-full">
         <div>
           <p className="mb-4">
             <span className="font-semibold"> Product :</span> {product?.title}
@@ -46,7 +46,7 @@ export default function ProductInfo({ product }: ProductPageProps) {
         </div>
         <div>
           <p>
-            <span className="font-semibold">People Who Are Following :</span>
+            <span className="font-semibold">Following :</span>
             <span className="font-bold bg-gray-300 px-3 ml-3 rounded">
               {product?.followers.length || "No Details"}
             </span>
@@ -72,10 +72,10 @@ export default function ProductInfo({ product }: ProductPageProps) {
                 : "not availible"}
             </p>
           </div>
-          <div className=" max-sm:self-center w-fit h-fit">
+          <div className=" max-sm:self-center">
             <a
               href={`https://www.amazon.com/dp/${product?.productAsin}`}
-              className=" bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className=" bg-blue-500 whitespace-nowrap  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Buy Now
             </a>

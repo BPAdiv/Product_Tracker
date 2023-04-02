@@ -11,7 +11,7 @@ const HomePage = () => {
   const [allProducts, setAllProducts] = useState<IProductProps[] | undefined>(
     undefined
   );
-  // useAuth();
+  useAuth();
   const getAllProducts = async () => {
     try {
       const { data } = await axios.get("http://localhost:8000/api/product");
@@ -26,8 +26,23 @@ const HomePage = () => {
   useEffect(() => {
     getAllProducts();
   }, []);
+  const handlePopularProducts = () => {
+    const pop = allProducts?.sort(
+      (a, b) => b.followers.length - a.followers.length
+    );
+    return pop;
+  };
+  const handleHotProducts = () => {
+    const hot = allProducts?.sort((a, b) => {
+      const dateA = new Date(a.createdAt);
+      const dateB = new Date(b.createdAt);
+      return dateB.getTime() - dateA.getTime();
+    });
+    return hot;
+  };
 
-  // console.log(user);
+  const popularProducts = handlePopularProducts();
+  const hotProducts = handleHotProducts();
 
   return (
     <>
@@ -39,21 +54,22 @@ const HomePage = () => {
             <button className="text-blue-600 font-semibold">View all</button>
           </div>
 
-          <CardCarusel products={allProducts} />
+          <CardCarusel products={popularProducts?.slice(0, 8)} />
         </div>
-        <div className="recommnedewd my-[4vw] ">
-          <div className="flex justify-between items-center my-2 py-1 border-b-gray-300 border-b ">
-            <p className="text-lg font-bold">Recommnedewd</p>
-            <button className="text-blue-600 font-semibold">View all</button>
-          </div>
-          <CardCarusel products={allProducts} />
-        </div>
+
         <div className="hot my-[4vw]">
           <div className="flex justify-between items-center my-2 py-1 border-b-gray-300 border-b ">
             <p className="text-lg font-bold">Hot</p>
             <button className="text-blue-600 font-semibold">View all</button>
           </div>
-          <CardCarusel products={allProducts} />
+          <CardCarusel products={hotProducts?.slice(0, 8)} />
+        </div>
+        <div className="recommnedewd my-[4vw] ">
+          <div className="flex justify-between items-center my-2 py-1 border-b-gray-300 border-b ">
+            <p className="text-lg font-bold">All Products</p>
+            <button className="text-blue-600 font-semibold">View all</button>
+          </div>
+          <CardCarusel products={allProducts?.slice(0, 8)} />
         </div>
       </div>
     </>

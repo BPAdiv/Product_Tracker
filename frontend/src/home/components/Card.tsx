@@ -1,5 +1,11 @@
-import * as React from "react";
+import { useContext } from "react";
 import { IProductProps } from "../../types";
+import addIcon from "../../assets/icons8-add-new-48.png";
+import editIcon from "../../assets/icons8-pen-squared-32.png";
+import AddFollowModal from "../../general/AddFollowModal";
+import EditTargetPrice from "../../general/EditTargetPrice";
+import { UserContext } from "../../contexts/userContext";
+import DeleteProductModal from "../../general/DeleteProductModal";
 // export interface IUser {
 //   _id: string;
 //   email: string;
@@ -32,8 +38,27 @@ type Product = {
   product: IProductProps;
 };
 export default function Card({ product }: Product) {
+  const { user } = useContext(UserContext);
+  const checkIsFollowing = () => {
+    if (!user) return false;
+    const T = product.followers.find(
+      (Fuser) =>
+        typeof Fuser.userId !== "string" && Fuser.userId._id === user._id
+    );
+
+    return T ? true : false;
+  };
+  const isFollowing = checkIsFollowing();
   return (
     <div className="w-full  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-4  ">
+      <div className="flex justify-between items-center mb-3">
+        <EditTargetPrice product={product} />
+        {isFollowing ? (
+          <DeleteProductModal product={product} />
+        ) : (
+          <AddFollowModal product={product} />
+        )}
+      </div>
       <div className="w-full h-[7vw] mb-2">
         <img
           className=" rounded-t-lg w-full h-full object-contain"

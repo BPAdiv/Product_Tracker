@@ -18,7 +18,7 @@ mongoose
   .connect(process.env.MONGO as string, {})
   .then(() => {
     // getAmazonLinks();
-    activateBot();
+    // activateBot();
     console.log("connected");
   })
   .catch((err: any) => {
