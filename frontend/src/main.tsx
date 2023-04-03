@@ -12,6 +12,7 @@ import LoginPage from "./login/LoginPage";
 import UserProvider from "./contexts/userContext";
 import UserHome from "./user/UserHome";
 import FollowProductPage from "./followProduct/FollowProductPage";
+import AllProductsPage from "./productsPages/AllProductsPage";
 
 const router = createBrowserRouter([
   {
@@ -30,13 +31,28 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/user/:userId",
+    path: "/user/tracks",
     element: <UserHome />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/addProduct",
     element: <FollowProductPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/products/popular",
+    element: <FollowProductPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/products/hot",
+    element: <FollowProductPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/products/all",
+    element: <AllProductsPage />,
     errorElement: <ErrorPage />,
   },
 ]);
