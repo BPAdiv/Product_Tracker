@@ -5,9 +5,11 @@ import NavBar from "../general/NavBar";
 import { useAuth } from "../hooks/useAuth";
 import CardCarusel from "./components/CardCarusel";
 import { IProductProps } from "../types";
+import Loading from "../general/Loading";
 
 const HomePage = () => {
   const { user, setUser } = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(true);
   const [allProducts, setAllProducts] = useState<IProductProps[] | undefined>(
     undefined
   );
@@ -18,6 +20,7 @@ const HomePage = () => {
       console.log(data);
 
       setAllProducts([...data.products]);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -48,29 +51,43 @@ const HomePage = () => {
     <>
       <NavBar />
       <div className="mx-[5vw] ">
-        <div className="Popular my-[4vw]">
-          <div className="flex justify-between items-center my-2 py-1 border-b-gray-300 border-b ">
-            <p className="text-lg font-bold">Popular</p>
-            <button className="text-blue-600 font-semibold">View all</button>
-          </div>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            <div className="Popular my-[4vw]">
+              <div className="flex justify-between items-center my-2 py-1 border-b-gray-300 border-b ">
+                <p className="text-lg font-bold">Popular</p>
+                <button className="text-blue-600 font-semibold">
+                  View all
+                </button>
+              </div>
 
-          <CardCarusel products={popularProducts?.slice(0, 8)} />
-        </div>
+              <CardCarusel products={popularProducts?.slice(0, 8)} />
+            </div>
 
-        <div className="hot my-[4vw]">
-          <div className="flex justify-between items-center my-2 py-1 border-b-gray-300 border-b ">
-            <p className="text-lg font-bold">Hot</p>
-            <button className="text-blue-600 font-semibold">View all</button>
-          </div>
-          <CardCarusel products={hotProducts?.slice(0, 8)} />
-        </div>
-        <div className="recommnedewd my-[4vw] ">
-          <div className="flex justify-between items-center my-2 py-1 border-b-gray-300 border-b ">
-            <p className="text-lg font-bold">All Products</p>
-            <button className="text-blue-600 font-semibold">View all</button>
-          </div>
-          <CardCarusel products={allProducts?.slice(0, 8)} />
-        </div>
+            <div className="hot my-[4vw]">
+              <div className="flex justify-between items-center my-2 py-1 border-b-gray-300 border-b ">
+                <p className="text-lg font-bold">Hot</p>
+                <button className="text-blue-600 font-semibold">
+                  View all
+                </button>
+              </div>
+
+              <CardCarusel products={hotProducts?.slice(0, 8)} />
+            </div>
+            <div className="recommnedewd my-[4vw] ">
+              <div className="flex justify-between items-center my-2 py-1 border-b-gray-300 border-b ">
+                <p className="text-lg font-bold">All Products</p>
+                <button className="text-blue-600 font-semibold">
+                  View all
+                </button>
+              </div>
+
+              <CardCarusel products={allProducts?.slice(0, 8)} />
+            </div>
+          </>
+        )}
       </div>
     </>
   );

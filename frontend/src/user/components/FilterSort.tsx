@@ -12,22 +12,16 @@ interface IProps {
 export default function FilterSort({ handleSortChange }: IProps) {
   return (
     <>
-      <div className="flex justify-center items-center mb-5">
+      {/* <div className="flex justify-center items-center mb-5">
         <a
           href="/follow"
           className="w-[50%] py-3 px-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs lg:text-sm  text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Add new product to track
         </a>
-      </div>
-      <div className="flex mb-10">
+      </div> */}
+      <div className="flex ">
         <div>
-          <label
-            htmlFor="countries"
-            className="block mb-2 text-lg  text-gray-900 dark:text-white font-semibold"
-          >
-            Select sort option
-          </label>
           <select
             onChange={(e) => handleSortChange(e)}
             id="sort"

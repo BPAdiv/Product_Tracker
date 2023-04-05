@@ -6,6 +6,8 @@ import CardCarusel from "../home/components/CardCarusel";
 import { useAuth } from "../hooks/useAuth";
 import { IProductProps } from "../types";
 import FilterSort from "./components/FilterSort";
+import UserHeading from "./components/UserHeading";
+import UserNewProduct from "./components/UserNewProduct";
 
 let defaultProducts: IProductProps[] | undefined = undefined;
 const UserPage = () => {
@@ -86,7 +88,15 @@ const UserPage = () => {
   return (
     <div>
       <div className="m-[5vw] ">
-        <FilterSort handleSortChange={handleSortChange} />
+        <UserHeading />
+
+        <UserNewProduct />
+        <div className="flex justify-between items-end border-b py-3 mb-5">
+          <h1 className="text-2xl font-semibold max-sm:text-xl">
+            Your Products
+          </h1>
+          <FilterSort handleSortChange={handleSortChange} />
+        </div>
         <CardCarusel products={userProduct} />
       </div>
     </div>
