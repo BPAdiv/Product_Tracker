@@ -8,6 +8,7 @@ import { IProductProps } from "../types";
 import FilterSort from "./components/FilterSort";
 import UserHeading from "./components/UserHeading";
 import UserNewProduct from "./components/UserNewProduct";
+import { Navigate } from "react-router-dom";
 
 let defaultProducts: IProductProps[] | undefined = undefined;
 const UserPage = () => {
@@ -86,7 +87,7 @@ const UserPage = () => {
     }
   };
   return (
-    <div>
+    <>
       <div className="m-[5vw] ">
         <UserHeading />
 
@@ -99,7 +100,7 @@ const UserPage = () => {
         </div>
         <CardCarusel products={userProduct} />
       </div>
-    </div>
+    </>
   );
 };
 

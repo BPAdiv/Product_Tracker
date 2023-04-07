@@ -4,9 +4,9 @@ import img2 from "../../assets/pexels-pixabay-277390.jpg";
 import img3 from "../../assets/pexels-pixabay-4158.jpg";
 export default function UserNewProduct() {
   return (
-    <div className="w-full  flex justify-between items-center   ">
+    <div className="w-full  flex justify-between items-center my-[5vw]  ">
       <div className="flex flex-col md:flex-row  gap-5 ">
-        <div className="  flex flex-col  w-1/2 max-sm:w-full h-full   ">
+        <div className=" flex flex-col  w-1/2 max-md:w-full h-auto  gap-5  ">
           <div>
             <p className="text-3xl xl:text-4xl font-semibold leading-9 text-gray-800">
               Track another
@@ -20,8 +20,11 @@ export default function UserNewProduct() {
               the readable content of a page when looking at its layout. */}
             </p>
           </div>
-          <div className="mt-16 w-full">
-            <button className="px-4 bg-gray-900 flex justify-between items-center w-full lg:w-72 h-14 text-white hover:bg-gray-700">
+          <div className=" w-full mt-auto">
+            <a
+              href="/addProduct"
+              className="px-4 bg-gray-900 flex justify-between items-center w-full lg:w-72 h-14 text-white hover:bg-gray-700"
+            >
               <p className="text-xl font-medium leading-5">Add Now</p>
               <svg
                 width="32"
@@ -52,11 +55,11 @@ export default function UserNewProduct() {
                   strokeLinejoin="round"
                 />
               </svg>
-            </button>
+            </a>
           </div>
         </div>
 
-        <div className="grid  w-1/2 max-sm:w-full grid-cols-2 grid-rows-2  gap-5">
+        <div className="grid  w-1/2 max-md:w-full grid-cols-2 grid-rows-2  gap-5">
           <img
             className="row-span-2  object-cover h-full "
             src={img1}

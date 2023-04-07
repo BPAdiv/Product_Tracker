@@ -6,6 +6,8 @@ import { useAuth } from "../hooks/useAuth";
 import CardCarusel from "./components/CardCarusel";
 import { IProductProps } from "../types";
 import Loading from "../general/Loading";
+import HeroSection from "./components/HeroSection";
+import Footer from "../general/Footer";
 
 const HomePage = () => {
   const { user, setUser } = useContext(UserContext);
@@ -50,6 +52,7 @@ const HomePage = () => {
   return (
     <>
       <NavBar />
+      <HeroSection />
       <div className="mx-[5vw] ">
         {isLoading ? (
           <Loading />
@@ -89,6 +92,7 @@ const HomePage = () => {
           </>
         )}
       </div>
+      <Footer />
     </>
   );
 };
