@@ -13,6 +13,9 @@ import UserProvider from "./contexts/userContext";
 import UserHome from "./user/UserHome";
 import FollowProductPage from "./followProduct/FollowProductPage";
 import AllProductsPage from "./productsPages/AllProductsPage";
+import ProductsContextProvider, {
+  ProductsContext,
+} from "./contexts/productsContext";
 
 const router = createBrowserRouter([
   {
@@ -40,18 +43,9 @@ const router = createBrowserRouter([
     element: <FollowProductPage />,
     errorElement: <ErrorPage />,
   },
+
   {
-    path: "/products/popular",
-    element: <FollowProductPage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/products/hot",
-    element: <FollowProductPage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/products/all",
+    path: "/products",
     element: <AllProductsPage />,
     errorElement: <ErrorPage />,
   },
@@ -59,7 +53,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <UserProvider>
-      <RouterProvider router={router} />
+      <ProductsContextProvider>
+        <RouterProvider router={router} />
+      </ProductsContextProvider>
     </UserProvider>
   </React.StrictMode>
 );

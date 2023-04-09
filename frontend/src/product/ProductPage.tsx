@@ -7,6 +7,7 @@ import { IProductProps } from "../types";
 import ProductCategory from "./components/ProductCategory";
 import ProductChart from "./components/ProductChart";
 import ProductInfo from "./components/ProductInfo";
+import Footer from "../general/Footer";
 
 export type ProductPageProps = {
   product: IProductProps | undefined;
@@ -72,6 +73,7 @@ export default function ProductPage() {
       <ProductInfo product={singleProduct} />
       <ProductChart product={singleProduct} />
       <ProductCategory product={singleProduct} sameCategory={relatedProduct} />
+      <Footer />
     </div>
   );
 }

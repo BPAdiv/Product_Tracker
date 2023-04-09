@@ -27,18 +27,7 @@ export default function VerifyProduct({
   };
 
   return (
-    <div className="w-full max-w-2xl bg-white shadow-md rounded  pb-5">
-      <div className="flex  font-semibold text-center text-lg mb-8">
-        <h1 className="p-2 py-3 w-full   bg-blue-600 text-white font-bold opacity-60 rounded-tl  ">
-          Enter Product{" "}
-        </h1>
-        <h1 className="p-2 py-3 w-full   bg-blue-600 text-white font-bold   ">
-          Verify Product{" "}
-        </h1>
-        <h1 className="p-2 py-3 w-full   bg-blue-600 text-white font-bold rounded-tr opacity-60 ">
-          Product Confirmed{" "}
-        </h1>
-      </div>
+    <div className="w-full max-w-2xl bg-white shadow-md rounded py-5">
       {isLoading ? (
         <div>
           <div>Waiting to confirm...</div>

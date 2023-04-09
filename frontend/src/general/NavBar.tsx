@@ -1,11 +1,17 @@
 import { useContext } from "react";
 import { UserContext } from "../contexts/userContext";
+import { Link, NavLink } from "react-router-dom";
 
 // export interface INavBarProps {
 // }
 
 export default function NavBar() {
   const { user } = useContext(UserContext);
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (e.currentTarget.pathname === window.location.pathname) {
+      window.location.reload();
+    }
+  };
   return (
     <>
       <div>
@@ -18,7 +24,7 @@ export default function NavBar() {
                 alt="Flowbite Logo"
               />
               <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-                Track
+                BargainHive
               </span>
             </a>
             <div className="flex items-center">
@@ -60,28 +66,35 @@ export default function NavBar() {
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="/prodcuts/popular"
-                    className="text-gray-900 dark:text-white hover:underline"
+                  <NavLink
+                    to="/products"
+                    state={{ productTab: "pop" }}
+                    className="text-gray-900 dark:text-white hover:underline "
+                    onClick={handleLinkClick}
+                    // onClick={this.forceUpdate}
                   >
                     Popular
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a
-                    href="/prodcuts/hot"
-                    className="text-gray-900 dark:text-white hover:underline"
+                  <NavLink
+                    to="/products"
+                    state={{ productTab: "hot" }}
+                    className="text-gray-900 dark:text-white hover:underline "
+                    onClick={handleLinkClick}
                   >
                     Hot
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a
-                    href="/products/all"
+                  <NavLink
+                    to="/products"
+                    state={{ productTab: "all" }}
                     className="text-gray-900 dark:text-white hover:underline"
+                    onClick={handleLinkClick}
                   >
                     All Products
-                  </a>
+                  </NavLink>
                 </li>
                 {user && (
                   <li>

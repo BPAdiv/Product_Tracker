@@ -3,6 +3,7 @@ import { UserContext } from "../../contexts/userContext";
 import ConfirmProduct from "./ConfirmProduct";
 import EnterProduct from "./EnterProduct";
 import VerifyProduct from "./VerifyProduct";
+import ProgressStepper from "./ProgressStepper";
 
 export interface IProductFormDetails {
   productLink: string;
@@ -39,7 +40,8 @@ export default function MultiStepsForm() {
 
   return (
     <>
-      <div className="flex justify-center items-center mx-[5vw] mt-10">
+      <div className="flex flex-col justify-center items-center mx-[5vw] mt-10 min-h-[85vh]">
+        <ProgressStepper formStep={formStep} />
         {formStep === 1 && (
           <EnterProduct
             formStep={formStep}

@@ -1,33 +1,43 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import productBanner from "../../assets/josh-marshall-lLOZVSa7DGU-unsplash.jpg";
 import axios from "axios";
 import { IProductProps } from "../../types";
 import Card from "../../home/components/Card";
 import SortProducts from "./SortProducts";
 import ProductsTabs from "./ProductsTabs";
+import ProductsHero from "./ProductsHero";
+import { ProductsContext } from "../../contexts/productsContext";
+import Loading from "../../general/Loading";
+import { useLocation, useParams } from "react-router-dom";
 
-let defaultProduct: IProductProps[] | undefined;
 export default function ProductsGrid() {
-  const [allProducts, setAllProducts] = useState<IProductProps[] | undefined>(
-    undefined
-  );
+  const {
+    allProducts,
+    handlePopularProducts,
+    handleHotProducts,
+    defaultProducts,
+  } = useContext(ProductsContext);
+  const [currentProducts, setCurrentProducts] = useState<
+    IProductProps[] | undefined
+  >(undefined);
   const [countPage, setCountPage] = useState<number>(40);
+  const [tabActive, setTabActive] = useState("all");
 
+  const { state } = useLocation();
+  const popularProducts = handlePopularProducts(defaultProducts);
+  const hotProducts = handleHotProducts(defaultProducts);
   useEffect(() => {
-    const getAllProducts = async () => {
-      try {
-        const { data } = await axios.get("http://localhost:8000/api/product");
-        console.log(data);
+    setCurrentProducts([...(allProducts || [])]);
 
-        setAllProducts([...data.products]);
-        defaultProduct = [...data.products];
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getAllProducts();
-  }, []);
+    if (!state) return;
+    state.productTab && setTabActive(state.productTab);
+    state.productTab === "pop" && setCurrentProducts([...popularProducts]);
+    state.productTab === "hot" && setCurrentProducts([...hotProducts]);
+    console.log(state);
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [allProducts]);
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     // if (!e) return userProduct;
@@ -38,35 +48,35 @@ export default function ProductsGrid() {
       case "High": {
         //statements;
         console.log("hi");
-        const products = [...(allProducts || [])]?.sort(
+        const products = [...(currentProducts || [])]?.sort(
           (a, b) =>
             Number(b.currentPrice.replace("$", "")) -
             Number(a.currentPrice.replace("$", ""))
         );
-        setAllProducts(products);
+        setCurrentProducts(products);
         // console.log(products);
 
         break;
       }
       case "Low": {
         //statements;
-        const products = [...(allProducts || [])]?.sort(
+        const products = [...(currentProducts || [])]?.sort(
           (a, b) =>
             Number(a.currentPrice.replace("$", "")) -
             Number(b.currentPrice.replace("$", ""))
         );
-        setAllProducts(products);
+        setCurrentProducts(products);
 
         break;
       }
       case "Date": {
         //statements;
-        const products = [...(allProducts || [])]?.sort((a, b) => {
+        const products = [...(currentProducts || [])]?.sort((a, b) => {
           const dateA = new Date(a.lastUpdated);
           const dateB = new Date(b.lastUpdated);
           return dateA.getTime() - dateB.getTime();
         });
-        setAllProducts(products);
+        setCurrentProducts(products);
         break;
       }
       default: {
@@ -78,7 +88,7 @@ export default function ProductsGrid() {
   };
 
   const NextProducts = () => {
-    if (!allProducts) return;
+    if (!currentProducts) return;
     if (countPage - 40 >= 40) {
       setCountPage(countPage - 40);
     } else {
@@ -86,50 +96,41 @@ export default function ProductsGrid() {
     }
   };
   const PrevProducts = () => {
-    if (!allProducts) return;
-    if (countPage + 40 <= allProducts?.length) {
+    if (!currentProducts) return;
+    if (countPage + 40 <= currentProducts?.length) {
       setCountPage(countPage + 40);
     } else {
-      setCountPage(allProducts?.length);
+      setCountPage(currentProducts?.length);
     }
   };
+  const ref = useRef<HTMLDivElement | null>(null);
+
   return (
     <div className="mx-[5vw]   py-12">
       <div className="flex flex-col">
-        <div className="flex flex-col justify-center">
-          <div className="relative ">
-            <img
-              className="hidden sm:block w-full object-cover    max-h-[60vh]"
-              src={productBanner}
-              alt="sofa"
-            />
-            <img
-              className="sm:hidden w-full object-cover "
-              src={productBanner}
-              alt="sofa"
-            />
-            <div className="absolute sm:top-8 top-4 pr-10 sm:pr-0 left-4 sm:left-8 flex justify-start items-start">
-              <p className="text-3xl sm:text-4xl font-semibold leading-9 text-white">
-                Get Your Amazon Products Today
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-10">
+        <div ref={ref} className="mt-10">
           <SortProducts handleSortChange={handleSortChange} />
         </div>
+
         <ProductsTabs
           setCountPage={setCountPage}
-          setAllProducts={setAllProducts}
-          allProducts={allProducts}
-          defaultProduct={defaultProduct}
+          setCurrentProducts={setCurrentProducts}
+          setTabActive={setTabActive}
+          tabActive={tabActive}
         />
-        <div className="grid   justify-items-center  grid-cols-2 md:grid-cols-4 lg:grid-cols-5 mt-3  gap-5">
-          {allProducts?.slice(countPage - 40, countPage).map((pro, i) => {
-            return <Card product={pro} key={i} />;
-          })}
-        </div>
+        {!currentProducts ? (
+          <Loading />
+        ) : (
+          <div
+            id="products"
+            className=" grid   justify-items-center  grid-cols-2 md:grid-cols-4 lg:grid-cols-5 mt-3  gap-5"
+          >
+            {currentProducts?.slice(countPage - 40, countPage).map((pro, i) => {
+              return <Card product={pro} key={i} />;
+            })}
+          </div>
+        )}
+
         <div className="mt-10 flex justify-between">
           <button
             onClick={NextProducts}

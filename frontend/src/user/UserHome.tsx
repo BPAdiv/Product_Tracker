@@ -5,6 +5,7 @@ import { useAuth } from "../hooks/useAuth";
 import UserPage from "./UserPage";
 import { Navigate } from "react-router-dom";
 import NeedToLogin from "../general/NeedToLogin";
+import Footer from "../general/Footer";
 
 // export interface IAppProps {}
 
@@ -27,6 +28,7 @@ export default function UserHome() {
       ) : (
         <NeedToLogin isLogin={isLogin} setIsLogin={setIsLogin} />
       )}
+      <Footer />
     </>
   );
 }

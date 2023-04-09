@@ -5,18 +5,7 @@ export interface IConfirmProductProps {}
 
 export default function ConfirmProduct(props: IConfirmProductProps) {
   return (
-    <div className="w-full max-w-2xl bg-white shadow-md rounded  pb-5">
-      <div className="flex  font-semibold text-center text-lg mb-8">
-        <h1 className="p-2 py-3 w-full   bg-blue-600 text-white font-bold opacity-60 rounded-tl  ">
-          Enter Product{" "}
-        </h1>
-        <h1 className="p-2 py-3 w-full   bg-blue-600 text-white font-bold opacity-60  ">
-          Verify Product{" "}
-        </h1>
-        <h1 className="p-2 py-3 w-full   bg-blue-600 text-white font-bold rounded-tr  ">
-          Product Confirmed{" "}
-        </h1>
-      </div>
+    <div className="w-full max-w-2xl bg-white shadow-md rounded   py-5">
       <div className="flex flex-col pb-5">
         <div className="text-center my-8 font-bold text-xl">
           <h1>Product confirmed and added to your following </h1>
