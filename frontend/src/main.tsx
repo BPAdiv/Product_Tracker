@@ -16,6 +16,7 @@ import AllProductsPage from "./productsPages/AllProductsPage";
 import ProductsContextProvider, {
   ProductsContext,
 } from "./contexts/productsContext";
+import GetStartedPage from "./about/GetStartedPage";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,11 @@ const router = createBrowserRouter([
   {
     path: "/products",
     element: <AllProductsPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/getStarted",
+    element: <GetStartedPage />,
     errorElement: <ErrorPage />,
   },
 ]);

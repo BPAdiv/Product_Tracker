@@ -40,7 +40,7 @@ export default function MultiStepsForm() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center mx-[5vw] mt-10 min-h-[85vh]">
+      <div className="flex flex-col justify-center items-center m-[5vw] mt-10 min-h-[85vh]">
         <ProgressStepper formStep={formStep} />
         {formStep === 1 && (
           <EnterProduct

@@ -39,31 +39,31 @@ type Product = {
 export default function CardCarusel({ products }: Product) {
   const carouselRef = useRef<AliceCarousel>(null);
 
-  const responsive = {
-    0: { items: 1 },
-    568: { items: 2 },
-    768: { items: 3 },
-    1024: { items: 4 },
-  };
-  const handleNextClick = () => {
-    if (carouselRef.current) {
-      carouselRef.current.slideNext();
-    }
-  };
-  const handlePrevClick = () => {
-    if (carouselRef.current) {
-      carouselRef.current.slidePrev();
-    }
-  };
-  const items = products
-    ?.map((product, index) => {
-      return <Card product={product} key={index} />;
-    })
-    .concat(
-      products?.map((product, index) => {
-        return <Card product={product} key={index} />;
-      })
-    );
+  // const responsive = {
+  //   0: { items: 1 },
+  //   568: { items: 2 },
+  //   768: { items: 3 },
+  //   1024: { items: 4 },
+  // };
+  // const handleNextClick = () => {
+  //   if (carouselRef.current) {
+  //     carouselRef.current.slideNext();
+  //   }
+  // };
+  // const handlePrevClick = () => {
+  //   if (carouselRef.current) {
+  //     carouselRef.current.slidePrev();
+  //   }
+  // };
+  // const items = products
+  //   ?.map((product, index) => {
+  //     return <Card product={product} key={index} />;
+  //   })
+  //   .concat(
+  //     products?.map((product, index) => {
+  //       return <Card product={product} key={index} />;
+  //     })
+  //   );
 
   //   const items = [
   //     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">

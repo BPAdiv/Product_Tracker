@@ -43,11 +43,37 @@ export const verifyProduct = async (req: Request, res: Response) => {
     const $ = cheerio.load(data);
     const productTitle = $("#productTitle").text().trim();
     const productImage = $("#landingImage").attr("src");
-    const currentPrice = $(
+    let currentPrice = $(
       "#corePrice_feature_div > div > span > span.a-offscreen"
     ).text();
     if (!productTitle || !productImage) {
       res.status(404).json({ message: "Product not found" });
+    }
+    if (!currentPrice) {
+      console.log("there is no price to display");
+      currentPrice = $(
+        "#corePriceDisplay_desktop_feature_div > div.a-section.a-spacing-none.aok-align-center > span > span.a-offscreen"
+      )
+        .first()
+        .text();
+    }
+    if (!currentPrice) {
+      console.log("there is no price to display the second option");
+      // currentPrice = $(
+      //   "#corePrice_desktop > div > table > tbody > tr > td.a-span12 > span.a-price.a-text-price.a-size-medium.apexPriceToPay > span:nth-child(2)"
+      // ).text();
+      currentPrice = $(
+        "#corePrice_desktop > div > table > tbody > tr > td.a-span12 > span.a-price.a-text-price.a-size-medium.apexPriceToPay > span:nth-child(2)"
+      )
+        .first()
+        .text();
+    }
+    if (!currentPrice) {
+      console.log("there is no price to display the third option");
+      currentPrice = $("#availability > span").text().trim();
+    }
+    if (!currentPrice) {
+      currentPrice = "No Details Available";
     }
     res.status(200).json({
       productTitle,

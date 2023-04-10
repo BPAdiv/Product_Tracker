@@ -9,19 +9,25 @@ import ProductsHero from "./ProductsHero";
 import { ProductsContext } from "../../contexts/productsContext";
 import Loading from "../../general/Loading";
 import { useLocation, useParams } from "react-router-dom";
+import { IAllProductsPageProps } from "../AllProductsPage";
 
-export default function ProductsGrid() {
+export default function ProductsGrid({
+  currentProducts,
+  setCurrentProducts,
+  tabActive,
+  setTabActive,
+}: IAllProductsPageProps) {
   const {
     allProducts,
     handlePopularProducts,
     handleHotProducts,
     defaultProducts,
   } = useContext(ProductsContext);
-  const [currentProducts, setCurrentProducts] = useState<
-    IProductProps[] | undefined
-  >(undefined);
+  // const [currentProducts, setCurrentProducts] = useState<
+  //   IProductProps[] | undefined
+  // >(undefined);
   const [countPage, setCountPage] = useState<number>(40);
-  const [tabActive, setTabActive] = useState("all");
+  // const [tabActive, setTabActive] = useState("all");
 
   const { state } = useLocation();
   const popularProducts = handlePopularProducts(defaultProducts);

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "../contexts/userContext";
 import { Link, NavLink } from "react-router-dom";
-
+import bargainHiveLogo from "../assets/icons8-hive-64.png";
 // export interface INavBarProps {
 // }
 
@@ -19,7 +19,7 @@ export default function NavBar() {
           <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xxl px-4 md:px-6 py-2.5">
             <a href="/" className="flex items-center">
               <img
-                src="https://flowbite.com/docs/images/logo.svg"
+                src={bargainHiveLogo}
                 className="h-6 mr-3 sm:h-9"
                 alt="Flowbite Logo"
               />
