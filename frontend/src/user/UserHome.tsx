@@ -16,10 +16,6 @@ export default function UserHome() {
   const [isLogin, setIsLogin] = useState(false);
   //   const { auth } = useAuth();
 
-  //   useEffect(() => {
-  //     auth();
-  //   }, []);
-
   useAuth();
 
   return (
