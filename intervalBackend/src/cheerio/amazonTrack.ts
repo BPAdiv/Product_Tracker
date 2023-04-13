@@ -1,6 +1,6 @@
 import axios from "axios";
 import cheerio from "cheerio";
-import Product from "../../models/products";
+import Product from "../models/products";
 import { IProduct } from ".././types";
 // import { globalLink } from "../../controlers/productController";
 import { sendMessageBot } from "../telegramBot";

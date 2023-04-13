@@ -2,7 +2,7 @@ import TelegramBot from "node-telegram-bot-api";
 // import { globalLink } from "../controlers/productController";
 import { IFollowUser, IProduct } from "./types";
 
-import User from "../models/users";
+import User from "./models/users";
 import jwt, { JwtPayload, Secret } from "jsonwebtoken";
 
 require("dotenv").config();
