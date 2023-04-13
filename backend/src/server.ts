@@ -4,10 +4,10 @@ require("dotenv").config(); // .env file support for configuration
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import userRouter from "../routes/userRouter";
+import userRouter from "./routes/userRouter";
 import axios from "axios";
 import cheerio from "cheerio";
-import productRouter from "../routes/productRouter";
+import productRouter from "./routes/productRouter";
 
 const app = express();
 // connect to db (mongodb + mongoose)

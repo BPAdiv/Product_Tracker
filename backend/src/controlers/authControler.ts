@@ -60,19 +60,17 @@ export const login = async (req: Request, res: Response) => {
 //     res.status(500).json({ message: error.message });
 //   }
 // };
-const checkToken = async (token:string) => {
+const checkToken = async (token: string) => {
   try {
     if (!token) return;
     const decoded = jwt.verify(token, process.env.JWT_ || "");
-    if (!(decoded as { id: string }).id )
-    return ;
-    
+    if (!(decoded as { id: string }).id) return;
+
     // const { email } = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById((decoded as { id: string }).id);
-    if (!user) return
-    return user
-    
-  } catch (err:any) {
+    if (!user) return;
+    return user;
+  } catch (err: any) {
     if (err.name === "TokenExpiredError") {
       console.log("Token expired");
     } else {
@@ -80,7 +78,7 @@ const checkToken = async (token:string) => {
     }
   }
 };
-export const verfiyToken = async (req:Request, res:Response) => {
+export const verfiyToken = async (req: Request, res: Response) => {
   const authorizationHeader = req.headers.authorization;
 
   if (!authorizationHeader) {
@@ -103,8 +101,7 @@ export const verfiyToken = async (req:Request, res:Response) => {
     //   username,
     // ]);
 
-
-    res.status(200).json({ user});
+    res.status(200).json({ user });
   } catch (error) {
     // If the token is invalid, return a 401 status
     return res.status(401).send({ message: "Unauthorized" });
