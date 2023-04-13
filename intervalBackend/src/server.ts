@@ -4,16 +4,20 @@ require("dotenv").config(); // .env file support for configuration
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import userRouter from "../routes/userRouter";
+
 import axios from "axios";
 import cheerio from "cheerio";
-import productRouter from "../routes/productRouter";
+
+import { getAmazonLinks } from "./cheerio/amazonTrack";
+import { activateBot } from "./telegramBot";
 
 const app = express();
 // connect to db (mongodb + mongoose)
 mongoose
   .connect(process.env.MONGO as string, {})
   .then(() => {
+    // getAmazonLinks();
+    activateBot();
     console.log("connected");
   })
   .catch((err: any) => {
@@ -24,8 +28,8 @@ mongoose
 app.use(cors()); // allow cors origin
 app.use(express.json());
 
-app.use("/api/user", userRouter);
-app.use("/api/product", productRouter);
+// app.use("/api/user", userRouter);
+// app.use("/api/product", productRouter);
 
 app.use(express.json());
 

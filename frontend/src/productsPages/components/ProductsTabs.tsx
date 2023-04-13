@@ -45,7 +45,7 @@ export default function ProductsTabs({
   };
   return (
     <div className="border-b border-gray-200 dark:border-gray-700 mb-10">
-      <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+      <ul className="flex flex-wrap gap-3 text-base font-medium text-center text-gray-500 dark:text-gray-400">
         <Tab
           handleTabClick={handleTabClick}
           label="All Products"

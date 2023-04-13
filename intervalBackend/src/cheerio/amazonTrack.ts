@@ -2,9 +2,9 @@ import axios from "axios";
 import cheerio from "cheerio";
 import Product from "../../models/products";
 import { IProduct } from ".././types";
-import { globalLink } from "../../controlers/productController";
+// import { globalLink } from "../../controlers/productController";
 import { sendMessageBot } from "../telegramBot";
-
+export const globalLink = "https://www.amazon.com/dp/";
 const setCurrentPriceAndDate = (productAsin: string, currentPrice: string) => {
   try {
     const product = Product.findOneAndUpdate(

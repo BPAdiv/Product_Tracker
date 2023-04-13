@@ -27,7 +27,7 @@ export default function Tab({
     <li className="mr-2">
       <button
         onClick={() => handleTabClick(tabArray, tabValue)}
-        className={`inline-flex p-4 border-b-2 border-transparent rounded-t-lg ${
+        className={`inline-flex py-4 px-1 border-b-2 border-transparent rounded-t-lg ${
           tabActive === tabValue
             ? "text-blue-600  border-blue-600   dark:text-blue-500 dark:border-blue-500"
             : " hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
