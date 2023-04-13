@@ -21,7 +21,7 @@ export default function EnterProduct({
 
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/api/product/verifyProduct",
+        `${import.meta.env.VITE_BACKEND_URL}/api/product/verifyProduct`,
         productDetails
       );
       setProductDetails((prev) => ({ ...prev, ...data }));

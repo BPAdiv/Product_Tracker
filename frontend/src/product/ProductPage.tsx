@@ -33,7 +33,7 @@ export default function ProductPage() {
     const getSingleProduct = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:8000/api/product/${productAsin}`
+          `${import.meta.env.VITE_BACKEND_URL}/api/product/${productAsin}`
         );
         setSingleProduct({ ...data.singleProduct });
         console.log(data);
@@ -43,7 +43,9 @@ export default function ProductPage() {
     };
     const getRelatedProduct = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:8000/api/product`);
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/product`
+        );
         setRelatedProduct([...data.products]);
         console.log(data);
       } catch (error) {
@@ -56,7 +58,7 @@ export default function ProductPage() {
   // useEffect(() => {
   //   const getRelatedProduct = async () => {
   //     try {
-  //       const { data } = await axios.get(`http://localhost:8000/api/product`);
+  //       const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/product`);
   //       // setRelatedProduct({ ...data.singleProduct });
   //       console.log(data);
   //     } catch (error) {

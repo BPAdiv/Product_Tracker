@@ -15,7 +15,7 @@ export default function VerifyProduct({
     setIsLoading(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/api/product/followProduct",
+        `${import.meta.env.VITE_BACKEND_URL}/api/product/followProduct`,
         productDetails
       );
       console.log(data);

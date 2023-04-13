@@ -15,7 +15,7 @@ export default function Testing() {
   const onTelegramAuth = (user: any) => {
     console.log(user);
 
-    // axios.post('http://localhost:8000/auth', {token: user.auth_token})
+    // axios.post('${import.meta.env.VITE_BACKEND_URL}/auth', {token: user.auth_token})
     //   .then((response) => {
     //     // handle successful authentication
     //   })

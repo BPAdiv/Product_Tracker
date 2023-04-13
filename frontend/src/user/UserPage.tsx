@@ -24,7 +24,7 @@ const UserPage = () => {
       if (!user) return;
       try {
         const { data } = await axios.get(
-          `http://localhost:8000/api/product/user/${user._id}`
+          `${import.meta.env.VITE_BACKEND_URL}/api/product/user/${user._id}`
         );
         console.log(data);
 

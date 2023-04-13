@@ -29,7 +29,7 @@ export default function SignUp(props: ISignUpProps) {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/api/user/signup",
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/signup`,
         { email, password, userName }
       );
       console.log(data);

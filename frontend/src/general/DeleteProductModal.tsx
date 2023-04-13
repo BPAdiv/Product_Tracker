@@ -17,7 +17,7 @@ export default function DeleteProductModal({ product }: Product) {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/api/product/unfollow",
+        `${import.meta.env.VITE_BACKEND_URL}/api/product/unfollow`,
         { productId: product._id, userId: user._id }
       );
       console.log(data);

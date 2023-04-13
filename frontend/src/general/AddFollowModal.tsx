@@ -35,7 +35,7 @@ export default function AddFollowModal({ product }: Product) {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/api/product/followProduct",
+        `${import.meta.env.VITE_BACKEND_URL}/api/product/followProduct`,
         {
           targetPrice: newTargetPrice,
           productAsin: product.productAsin,

@@ -46,7 +46,9 @@ export default function ProductsContextProvider({
   );
   const getAllProducts = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/api/product");
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/product`
+      );
       console.log(data);
 
       setAllProducts([...data.products]);
