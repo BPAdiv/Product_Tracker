@@ -33,7 +33,7 @@ app.use(express.json());
 
 app.use(express.json());
 
-app.listen(8000, () => console.log("listen on port 8000"));
+app.listen(process.env.PORT, () => console.log("listen on port 8000"));
 
 // async function getProducts() {
 //   const { data } = await axios.get(
