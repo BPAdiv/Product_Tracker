@@ -18,6 +18,14 @@ interface UserContext {
 
 const context: { [key: number]: UserContext } = {};
 export const activateBot = () => {
+  bot
+    .setWebHook(process.env.WEBHOOK_URL as string)
+    .then(() => {
+      console.log("Webhook set up successfully");
+    })
+    .catch((error) => {
+      console.error("Error setting up webhook:", error);
+    });
   bot.setMyCommands([
     { command: "/help", description: "help " },
     { command: "/newtrack", description: "Add new track" },
