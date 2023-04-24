@@ -32,7 +32,7 @@ const HomePage = () => {
   return (
     <>
       <NavBar />
-      <ContactUsModal className="text-lg " content="Conatct us" />
+
       <HeroSection />
       <div className="mx-[5vw] ">
         {!allProducts ? (
