@@ -9,23 +9,28 @@ import {
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { UserContext } from "../../contexts/userContext";
+import loadingLotti from "../../assets/98288-loading.gif";
+import websiteLogo from "../../assets/icons8-hive-64.png";
 
 export interface ILoginProps {
   isLogin: boolean;
   setIsLogin: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function Login(props: ILoginProps) {
+export default function Login({ isLogin, setIsLogin }: ILoginProps) {
   const cookies = new Cookies();
 
-  const { isLogin, setIsLogin } = props;
   const { user, setUser } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const navigate = useNavigate();
 
   const handleSubmitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/user/login`,
@@ -34,13 +39,15 @@ export default function Login(props: ILoginProps) {
       console.log(data);
       setUser(data.data);
       cookies.set("token", data.token, { path: "/" });
-
+      setIsLoading(false);
       // localStorage.setItem("token", data.token);
       // localStorage.setItem("userId", data.data._id);
 
       navigate("/");
-    } catch (err) {
+    } catch (err: any) {
+      setIsLoading(false);
       console.log(err);
+      setErrorMessage(err.message);
     }
   };
 
@@ -51,18 +58,28 @@ export default function Login(props: ILoginProps) {
           href="#"
           className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
         >
-          <img
-            className="w-8 h-8 mr-2"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-            alt="logo"
-          />
-          Flowbite
+          <img className="w-8 h-8 mr-2" src={websiteLogo} alt="logo" />
+          Bargain Hive
         </a>
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          {isLoading ? (
+            <div>
+              <img className="w-24 h-24 mx-auto" src={loadingLotti} alt="" />
+            </div>
+          ) : (
+            ""
+          )}
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign in to your account
             </h1>
+            {errorMessage ? (
+              <div>
+                <p className="text-red-500 text-sm">{errorMessage} </p>
+              </div>
+            ) : (
+              ""
+            )}
             <form
               className="space-y-4 md:space-y-6"
               onSubmit={(e) => handleSubmitLogin(e)}
@@ -120,12 +137,12 @@ export default function Login(props: ILoginProps) {
                     </label>
                   </div>
                 </div>
-                <a
+                {/* <a
                   href="#"
                   className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
                 >
                   Forgot password?
-                </a>
+                </a> */}
               </div>
               <button
                 type="submit"

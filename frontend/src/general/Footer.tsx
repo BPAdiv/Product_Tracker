@@ -1,4 +1,5 @@
 import react from "react";
+import ContactUsModal from "./ContactUsModal";
 
 export default function Footer() {
   return (
@@ -38,20 +39,22 @@ export default function Footer() {
             </a>
           </div>
           <div className="px-5 py-2">
-            <a
+            {/* <a
               href="/"
               className="text-base leading-6 text-gray-500 hover:text-gray-400"
             >
               Contact
-            </a>
+            </a> */}
+            <ContactUsModal
+              className="text-base leading-6 text-gray-500 hover:text-gray-400"
+              content="Contact"
+            />
           </div>
           <div className="px-5 py-2">
-            <a
-              href="/"
+            <ContactUsModal
               className="text-base leading-6 text-gray-500 hover:text-gray-400"
-            >
-              Terms
-            </a>
+              content="Terms"
+            />
           </div>
         </nav>
         <div className="flex justify-center mt-8 space-x-6">

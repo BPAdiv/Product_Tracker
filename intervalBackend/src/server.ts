@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 
 import axios from "axios";
 import cheerio from "cheerio";
+import sgMail from "@sendgrid/mail";
 
 import { getAmazonLinks } from "./cheerio/amazonTrack";
 import { activateBot } from "./telegramBot";

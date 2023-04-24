@@ -11,6 +11,7 @@ import Footer from "../general/Footer";
 import { ProductsContext } from "../contexts/productsContext";
 import { NavLink } from "react-router-dom";
 import ProductsTeaser from "./components/ProductsTeaser";
+import ContactUsModal from "../general/ContactUsModal";
 
 const HomePage = () => {
   const { user, setUser } = useContext(UserContext);
@@ -31,6 +32,7 @@ const HomePage = () => {
   return (
     <>
       <NavBar />
+      <ContactUsModal className="text-lg " content="Conatct us" />
       <HeroSection />
       <div className="mx-[5vw] ">
         {!allProducts ? (

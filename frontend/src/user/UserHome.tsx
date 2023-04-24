@@ -7,7 +7,7 @@ import { Navigate } from "react-router-dom";
 import NeedToLogin from "../general/NeedToLogin";
 import Footer from "../general/Footer";
 import ConnectTelegram from "../general/ConnectTelegram";
-import Testing from "./components/Testing";
+import Testing from "./components/TelegramWidget";
 
 // export interface IAppProps {}
 
@@ -23,8 +23,9 @@ export default function UserHome() {
       <NavBar />
       {user ? (
         <>
-          <Testing />
-          {/* <ConnectTelegram /> */}
+          {/* <Testing /> */}
+
+          {!user.telegramId && <ConnectTelegram />}
           <UserPage />
         </>
       ) : (

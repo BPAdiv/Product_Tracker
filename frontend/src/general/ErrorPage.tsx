@@ -35,9 +35,12 @@ export default function ErrorPage() {
           Sorry about that! Please visit our hompage to get where you need to
           go.
         </p>
-        <button className="w-full lg:w-auto my-4 border rounded-md px-1 sm:px-16 py-5 bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50">
+        <a
+          href="/"
+          className="inline-block w-full lg:w-auto my-4 border rounded-md px-1 sm:px-16 py-5 bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
+        >
           Go back to Homepage
-        </button>
+        </a>
       </div>
     </div>
   );

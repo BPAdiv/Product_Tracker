@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import telegramIlu from "../assets/Mobile-rafiki.svg";
 import Cookies from "universal-cookie";
+import Testing from "../user/components/TelegramWidget";
+import TelegramWidget from "../user/components/TelegramWidget";
+import { UserContext } from "../contexts/userContext";
 
 export default function ConnectTelegram() {
   const cookies = new Cookies();
@@ -17,28 +20,29 @@ export default function ConnectTelegram() {
     <>
       {cookieToken ? (
         <div
-          className="
+          className="flex justify-center px-[5vw] items-center flex-col lg:flex-row 
         "
         >
-          {/* <div className="xl:w-1/2 md:mb-14 xl:mb-0 relative h-auto flex items-center justify-center">
+          <div className="lg:w-1/2   flex items-center justify-center ">
             <img
               src={telegramIlu}
               alt="Envelope with a newsletter"
               role="img"
-              className="h-full xl:w-full lg:w-1/2 w-full "
+              className="h-full   w-full max-h-[60vh] "
             />
           </div>
-          <div className="w-full xl:w-1/2 xl:pl-40 xl:py-28 ">
-            <h1 className="text-2xl md:text-4xl xl:text-5xl font-bold leading-10 text-gray-800 mb-4 text-center xl:text-left md:mt-0 mt-4">
+          <div className="w-full lg:w-1/2 lg:px-10  ">
+            <h1 className="text-2xl md:text-4xl xl:text-5xl font-bold leading-10 text-gray-800 mb-4 text-center lg:text-left md:mt-0 mt-4">
               Connect To Telegram
             </h1>
-            <p className="text-base leading-normal text-gray-600 text-center xl:text-left">
+            <p className="text-base leading-normal text-gray-600 text-center lg:text-left">
               You can connect to our telegram bot and our bot will send you a
               message when the price is lower then your target price.{" "}
               <span className="font-semibold text-lg">Easy!!</span>
             </p>
-            <div className="flex max-xl:justify-center max-xl:items-center   mt-12">
-              <a
+            <div className="flex max-lg:justify-center max-lg:items-center   mt-12">
+              <TelegramWidget />
+              {/* <a
                 href={`https://t.me/AmazonNodeBot?start=_token=${cookieToken}_source=website`}
                 className=" transition-all rounded-full hover:bg-blue-800 bg-blue-700  text-base font-medium leading-none text-white px-4 pl-1 uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700"
               >
@@ -69,9 +73,9 @@ export default function ConnectTelegram() {
                   ></path>
                 </svg>
                 connect Now
-              </a>
+              </a> */}
             </div>
-          </div> */}
+          </div>
         </div>
       ) : (
         ""

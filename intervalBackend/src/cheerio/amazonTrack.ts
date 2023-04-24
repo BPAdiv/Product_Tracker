@@ -4,6 +4,7 @@ import Product from "../models/products";
 import { IProduct } from ".././types";
 // import { globalLink } from "../../controlers/productController";
 import { sendMessageBot } from "../telegramBot";
+import { sendTrackEmail } from "../sendGridEmail";
 export const globalLink = "https://www.amazon.com/dp/";
 const setCurrentPriceAndDate = (productAsin: string, currentPrice: string) => {
   try {
@@ -31,6 +32,7 @@ const isPriceLower = (wholePrice: string, targetProduct: IProduct) => {
         "targetPrice: " + follow.targetPrice
       );
       sendMessageBot(targetProduct, follow, wholePrice);
+      sendTrackEmail(targetProduct, follow, wholePrice);
     } else {
       console.log("price not lower: " + follow.targetPrice);
     }

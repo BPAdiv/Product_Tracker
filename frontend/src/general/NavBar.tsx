@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/userContext";
 import { Link, NavLink } from "react-router-dom";
 import bargainHiveLogo from "../assets/icons8-hive-64.png";
+import { useAuth } from "../hooks/useAuth";
 // export interface INavBarProps {
 // }
 
@@ -12,6 +13,8 @@ export default function NavBar() {
       window.location.reload();
     }
   };
+
+  const { logout } = useAuth();
   return (
     <>
       <div>
@@ -27,7 +30,7 @@ export default function NavBar() {
                 BargainHive
               </span>
             </a>
-            <div className="flex items-center">
+            <div className="flex items-center ">
               <a
                 href="/getStarted"
                 className="mr-6 text-sm font-medium text-gray-500 dark:text-white hover:underline"
@@ -42,12 +45,20 @@ export default function NavBar() {
                   Login
                 </a>
               ) : (
-                <a
-                  href="/user/tracks"
-                  className="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                  Profile
-                </a>
+                <>
+                  <a
+                    href="/user/tracks"
+                    className="mr-3 text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  >
+                    Profile
+                  </a>
+                  <button
+                    onClick={logout}
+                    className=" text-sm font-medium p-2 rounded bg-blue-600 text-white   hover:underline"
+                  >
+                    Logout
+                  </button>
+                </>
               )}
             </div>
           </div>

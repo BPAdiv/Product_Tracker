@@ -8,6 +8,7 @@ import userRouter from "./routes/userRouter";
 import axios from "axios";
 import cheerio from "cheerio";
 import productRouter from "./routes/productRouter";
+import telegramRouter from "./routes/telegramRouter";
 
 const app = express();
 // connect to db (mongodb + mongoose)
@@ -26,10 +27,11 @@ app.use(express.json());
 
 app.use("/api/user", userRouter);
 app.use("/api/product", productRouter);
+app.use("/api/telegram", telegramRouter);
 
 app.use(express.json());
 
-app.listen(process.env.PORT, () => console.log("listen on port 8000"));
+app.listen(process.env.PORT || 8000, () => console.log("listen on port 8000"));
 
 // async function getProducts() {
 //   const { data } = await axios.get(

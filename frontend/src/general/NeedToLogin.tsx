@@ -14,8 +14,8 @@ export default function NeedToLogin({
   const navigate = useNavigate();
   return (
     <>
-      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-        <div className="relative w-auto my-6 mx-auto max-w-3xl p-5">
+      <div className=" justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none   ">
+        <div className="relative w-auto my-6  max-w-3xl p-5 z-50 ">
           {/*content*/}
           <div
             // onSubmit={(e) => handleSumbitNewFollow(e)}
@@ -56,8 +56,11 @@ export default function NeedToLogin({
             </div>
           </div>
         </div>
+        <div
+          onClick={() => setIsLogin(false)}
+          className="opacity-50 fixed inset-0 z-40 bg-black "
+        ></div>
       </div>
-      <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
     </>
   );
 }
