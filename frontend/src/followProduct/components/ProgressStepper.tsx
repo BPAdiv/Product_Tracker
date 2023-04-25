@@ -7,7 +7,7 @@ export default function ProgressStepper({ formStep }: StepperProps) {
     <ol className="flex  w-full  max-w-2xl bg-white shadow-md rounded  ">
       <li
         className={`w-1/3 flex items-center text-white space-x-2.5 ${
-          formStep === 1 ? "bg-blue-600" : "bg-blue-400 "
+          formStep === 1 ? "bg-blue-900" : "bg-blue-800 bg-opacity-75 "
         }  py-3  px-4  max-sm:flex-col max-sm:text-center  max-sm:gap-2  max-sm:space-x-0 rounded-tl-md duration-300 ease-in-out`}
       >
         <span className="flex items-center justify-center w-8 h-8 border  rounded-full shrink-0 ">
@@ -49,11 +49,15 @@ export default function ProgressStepper({ formStep }: StepperProps) {
         </svg>
       </li>
       <li
-        className={` w-1/3 flex items-center text-white space-x-2.5 ${
-          formStep === 2 ? "bg-blue-600" : "bg-blue-400"
-        }  py-3  px-4  max-sm:flex-col max-sm:text-center  max-sm:gap-2  max-sm:space-x-0 duration-300 ease-in-out`}
+        className={` w-1/3 flex items-center  text-gray-400 space-x-2.5 ${
+          formStep === 2
+            ? "bg-blue-900 text-white "
+            : "bg-gray-300   border-gray-400 border "
+        } ${
+          formStep === 3 && "bg-blue-800 bg-opacity-75 text-white"
+        } py-3  px-4  max-sm:flex-col max-sm:text-center  max-sm:gap-2  max-sm:space-x-0 duration-300 ease-in-out`}
       >
-        <span className="flex items-center justify-center w-8 h-8 border  rounded-full shrink-0 ">
+        <span className="flex items-center justify-center w-8 h-8 border  rounded-full shrink-0 border-gray-400 ">
           {formStep !== 3 ? (
             "2"
           ) : (
@@ -92,11 +96,13 @@ export default function ProgressStepper({ formStep }: StepperProps) {
         </svg>
       </li>
       <li
-        className={` w-1/3 flex items-center text-white space-x-2.5 max-sm:space-x-0 ${
-          formStep === 3 ? "bg-blue-600" : "bg-blue-400"
+        className={` w-1/3 flex items-center text-gray-400 space-x-2.5 max-sm:space-x-0 ${
+          formStep === 3
+            ? "bg-blue-900 text-white"
+            : "bg-gray-300   border-gray-400 border"
         }  py-3  px-4 max-sm:justify-center max-sm:flex-col   max-sm:gap-2 rounded-tr-md duration-300 ease-in-out`}
       >
-        <span className="flex items-center justify-center w-8 h-8 border  rounded-full shrink-0 ">
+        <span className="flex items-center justify-center w-8 h-8 border border-gray-400 rounded-full shrink-0 ">
           {formStep !== 3 ? (
             "3"
           ) : (

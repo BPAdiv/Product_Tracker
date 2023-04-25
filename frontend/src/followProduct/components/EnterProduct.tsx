@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { IProductFormDetails, typeProductDetailsProps } from "./MultiStepForm";
 import Searching from "../../assets/72785-searching.gif";
+import swal from "sweetalert";
 // export interface IEnterProductProps {}
 interface IProductFormTemp extends IProductFormDetails {
   [key: string]: any;
@@ -28,8 +29,22 @@ export default function EnterProduct({
       console.log(data);
       setFormStep(2);
       setIsLoading(false);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      setIsLoading(false);
+      if (error.response.status === 403) {
+        swal({
+          icon: "warning",
+          title: "Link is unvalid",
+          text: "Seems like you entered an unvalid amazon link and we could not found it. pls try a different link",
+        });
+      } else {
+        swal({
+          icon: "error",
+          title: "Oops, Something went wrong",
+          text: "Seems like is has been an error pls try again in a few minutes or a try different product ",
+        });
+      }
     }
   };
 
@@ -101,7 +116,7 @@ export default function EnterProduct({
             </div>
             <div className="flex items-center justify-center">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Next

@@ -24,7 +24,7 @@ export const verifyProduct = async (req: Request, res: Response) => {
     if (!productLink) res.status(404).json({ message: "No link provided" });
     const productAsin = extractProductAsin(productLink);
     if (!productAsin)
-      res.status(404).json({ message: "product asin not found" });
+      return res.status(403).json({ message: "product asin not found" });
 
     const { data } = await axios.get(
       `${globalLink + productAsin}?&language=en_US`,
@@ -119,6 +119,14 @@ export const followProduct = async (req: Request, res: Response) => {
     // }
     const checkProduct = await Product.findOne({ productAsin: productAsin });
     if (checkProduct) {
+      const isAlreadyFollowing = checkProduct.followers.find(
+        (fol) => fol.userId.toString() === userId
+      );
+
+      if (isAlreadyFollowing) {
+        return res.status(405).json({ message: "User already following" });
+      }
+
       checkProduct.followers.push({ userId, targetPrice });
       checkProduct.currentPrice = currentPrice;
       checkProduct.lastUpdated = new Date();

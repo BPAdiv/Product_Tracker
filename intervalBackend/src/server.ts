@@ -17,7 +17,8 @@ const app = express();
 mongoose
   .connect(process.env.MONGO as string, {})
   .then(() => {
-    // getAmazonLinks();
+    getAmazonLinks();
+    setInterval(getAmazonLinks, 43200000);
     activateBot();
     console.log("connected");
   })
@@ -31,10 +32,13 @@ app.use(express.json());
 
 // app.use("/api/user", userRouter);
 // app.use("/api/product", productRouter);
+app.get("/", (req: Request, res: Response) => {
+  res.send("server is live ");
+});
 
 app.use(express.json());
 
-app.listen(process.env.PORT, () => console.log("listen on port 8000"));
+app.listen(process.env.PORT, () => console.log("interval live"));
 
 // async function getProducts() {
 //   const { data } = await axios.get(

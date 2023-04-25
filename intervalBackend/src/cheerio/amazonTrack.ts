@@ -133,16 +133,32 @@ async function getProducts(targetProduct: IProduct) {
   setCurrentPriceAndDate(productAsin, currentPrice);
 }
 
+async function promisses(productArray: IProduct[]) {
+  const promises = productArray.map((element) => {
+    return getProducts(element);
+  });
+  await Promise.all(promises);
+}
 export const getAmazonLinks = async () => {
   try {
     const products = await Product.find().populate("followers.userId");
     if (!products) {
       return "has been error finding products links";
     }
-    const promises = products.map((element) => {
-      return getProducts(element);
-    });
-    await Promise.all(promises);
+
+    const halfLength = Math.ceil(products.length / 2);
+    const firstHalfIndex = 0;
+    const secondHalfIndex = halfLength;
+
+    // const promises = products.map((element) => {
+    //   return getProducts(element);
+    // });
+    // await Promise.all(promises);
+
+    promisses(products.slice(firstHalfIndex, secondHalfIndex));
+    setTimeout(() => {
+      promisses(products.slice(secondHalfIndex, products.length));
+    }, 6 * 60 * 60 * 1000);
   } catch (e) {
     console.log(e);
   }

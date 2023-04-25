@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { typeProductDetailsProps } from "./MultiStepForm";
 import waiting from "../../assets/13520-blue-bird-waiting.gif";
+import swal from "sweetalert";
 // export interface IVerifyProductProps {}
 
 export default function VerifyProduct({
@@ -11,6 +12,7 @@ export default function VerifyProduct({
   setProductDetails,
 }: typeProductDetailsProps) {
   const [isLoading, setIsLoading] = useState(false);
+
   const confirmProduct = async () => {
     setIsLoading(true);
     try {
@@ -21,8 +23,22 @@ export default function VerifyProduct({
       console.log(data);
       setIsLoading(false);
       setFormStep(3);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      setFormStep(1);
+      if (error.response.status === 405) {
+        swal({
+          icon: "warning",
+          title: "Already Following",
+          text: "Seems like you are already following this product pls try a different one",
+        });
+      } else {
+        swal({
+          icon: "error",
+          title: "Oops, Something went wrong",
+          text: "Seems like is has been an error pls try again in a few minutes or a try different product ",
+        });
+      }
     }
   };
 
@@ -94,14 +110,14 @@ export default function VerifyProduct({
                 onClick={() => {
                   setFormStep(1);
                 }}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="button"
               >
                 Go Back
               </button>
               <button
                 onClick={confirmProduct}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="button"
               >
                 Verify
