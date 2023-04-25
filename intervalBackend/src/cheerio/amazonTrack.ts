@@ -1,19 +1,24 @@
 import axios from "axios";
 import cheerio from "cheerio";
+// import User from "../models/users";
 import Product from "../models/products";
 import { IProduct } from ".././types";
 // import { globalLink } from "../../controlers/productController";
 import { sendMessageBot } from "../telegramBot";
 import { sendTrackEmail } from "../sendGridEmail";
 export const globalLink = "https://www.amazon.com/dp/";
-const setCurrentPriceAndDate = (productAsin: string, currentPrice: string) => {
+const setCurrentPriceAndDate = async (
+  productAsin: string,
+  currentPrice: string
+) => {
   try {
-    const product = Product.findOneAndUpdate(
-      { productAsin },
-      { currentPrice, lastUpdated: new Date() }
+    const product = await Product.findOneAndUpdate(
+      { productAsin: productAsin },
+      { currentPrice, lastUpdated: new Date() },
+      { new: true }
     );
     if (!product) return console.log("couldnt find product");
-    console.log("product updated successful");
+    console.log(product);
   } catch (error: any) {
     console.log(error.message);
   }
@@ -37,7 +42,7 @@ const isPriceLower = (wholePrice: string, targetProduct: IProduct) => {
       console.log("price not lower: " + follow.targetPrice);
     }
   });
-  setCurrentPriceAndDate(productAsin, currentPrice);
+  setCurrentPriceAndDate(productAsin, wholePrice);
 };
 // let product:IProduct;
 

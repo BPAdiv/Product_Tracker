@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-
+import trackUser from "../models/users";
 const ProductSchema = new mongoose.Schema({
   productAsin: { type: String, required: true },
   image: { type: String },
@@ -13,7 +13,7 @@ const ProductSchema = new mongoose.Schema({
   country: { type: String },
   followers: [
     {
-      userId: { type: Schema.Types.ObjectId, ref: "TrackUser", required: true },
+      userId: { type: Schema.Types.ObjectId, ref: trackUser, required: true },
       targetPrice: { type: Number, required: true },
     },
   ],

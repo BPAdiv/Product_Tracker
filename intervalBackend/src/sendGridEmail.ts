@@ -29,7 +29,7 @@ export const sendTrackEmail = (
   };
   const msg = {
     // to: "gadolbarak@gmail.com", // Change to your recipient
-    to: { email }, // Change to your recipient
+    to: "bargainhiveapp@gmail.com", // Change to your recipient
     from: "bargainhiveapp@gmail.com", // Change to your verified sender
     // text: "and easy to do anywhere, even with Node.js",
     // html: "<strong>and easy to do anywhere, even with Node.js</strong>",

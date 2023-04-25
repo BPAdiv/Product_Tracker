@@ -146,13 +146,13 @@ export const sendMessageBot = (
     caption:
       `<b>SALE!!</b> \n` +
       `${targetProduct.title} \n 
-      The current price is : <b>${wholePrice}</b>\n 
-      dont miss your chance click below to buy\n
-      <a href=\"${globalLink + targetProduct.productAsin}\">${
+The current price is : <b>${wholePrice}</b>\n 
+dont miss your chance click below to buy\n
+<a href=\"${globalLink + targetProduct.productAsin}\">${
         globalLink + targetProduct.productAsin
       }</a> \n
-      Your chat Id is ${telegramId} \n
-      Your target price is : ${targetPrice}
+Your chat Id is ${telegramId} \n
+Your target price is : ${targetPrice}
       `,
     parse_mode: "HTML",
   });

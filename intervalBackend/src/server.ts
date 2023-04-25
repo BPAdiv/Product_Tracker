@@ -36,8 +36,6 @@ app.get("/", (req: Request, res: Response) => {
   res.send("server is live ");
 });
 
-app.use(express.json());
-
 app.listen(process.env.PORT, () => console.log("interval live"));
 
 // async function getProducts() {
