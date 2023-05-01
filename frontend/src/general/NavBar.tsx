@@ -18,7 +18,7 @@ export default function NavBar() {
   return (
     <>
       <div>
-        <nav className="bg-white border-gray-200 dark:bg-gray-900">
+        <nav className="bg-white border-gray-200 ">
           <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xxl px-4 md:px-6 py-2.5">
             <a href="/" className="flex items-center">
               <img
@@ -26,51 +26,53 @@ export default function NavBar() {
                 className="h-6 mr-3 sm:h-9"
                 alt="Flowbite Logo"
               />
-              <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+              <span className="self-center text-xl font-semibold whitespace-nowrap ">
                 BargainHive
               </span>
             </a>
-            <div className="flex items-center ">
+            <div className="flex items-center max-sm:w-full ">
               <a
                 href="/getStarted"
-                className="mr-6 text-sm font-medium text-gray-500 dark:text-white hover:underline"
+                className="mr-6 text-sm font-medium text-gray-500  hover:underline"
               >
                 How To Start
               </a>
               {!user ? (
                 <a
                   href="/account/login"
-                  className="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  className="text-sm font-medium text-blue-600  hover:underline max-sm:ml-auto"
                 >
                   Login
                 </a>
               ) : (
                 <>
-                  <a
-                    href="/user/tracks"
-                    className="mr-3 text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  >
-                    Profile
-                  </a>
-                  <button
-                    onClick={logout}
-                    className=" text-sm font-medium p-2 rounded bg-blue-600 text-white   hover:underline"
-                  >
-                    Logout
-                  </button>
+                  <div className="max-sm:ml-auto">
+                    <a
+                      href="/user/tracks"
+                      className="mr-3 text-sm font-medium text-blue-600  hover:underline "
+                    >
+                      Profile
+                    </a>
+                    <button
+                      onClick={logout}
+                      className=" text-sm font-medium p-2 rounded bg-blue-600 text-white   hover:underline "
+                    >
+                      Logout
+                    </button>
+                  </div>
                 </>
               )}
             </div>
           </div>
         </nav>
-        <nav className="bg-gray-50 dark:bg-gray-700">
+        <nav className="bg-gray-50 ">
           <div className="max-w-screen-xxl px-4 py-3 mx-auto md:px-6">
             <div className="flex items-center">
               <ul className="flex flex-row flex-wrap   mt-0 mr-6 gap-4 text-sm font-medium">
                 <li>
                   <a
                     href="/"
-                    className="text-gray-900 dark:text-white hover:underline"
+                    className="text-gray-900  hover:underline"
                     aria-current="page"
                   >
                     Home
@@ -80,7 +82,7 @@ export default function NavBar() {
                   <NavLink
                     to="/products"
                     state={{ productTab: "pop" }}
-                    className="text-gray-900 dark:text-white hover:underline "
+                    className="text-gray-900  hover:underline "
                     onClick={handleLinkClick}
                     // onClick={this.forceUpdate}
                   >
@@ -91,7 +93,7 @@ export default function NavBar() {
                   <NavLink
                     to="/products"
                     state={{ productTab: "hot" }}
-                    className="text-gray-900 dark:text-white hover:underline "
+                    className="text-gray-900  hover:underline "
                     onClick={handleLinkClick}
                   >
                     Hot
@@ -101,7 +103,7 @@ export default function NavBar() {
                   <NavLink
                     to="/products"
                     state={{ productTab: "all" }}
-                    className="text-gray-900 dark:text-white hover:underline"
+                    className="text-gray-900  hover:underline"
                     onClick={handleLinkClick}
                   >
                     All Products
@@ -111,7 +113,7 @@ export default function NavBar() {
                   <li>
                     <a
                       href="/addProduct"
-                      className="text-gray-900 dark:text-white hover:underline"
+                      className="text-gray-900  hover:underline"
                     >
                       Track Product
                     </a>

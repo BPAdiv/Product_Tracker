@@ -84,7 +84,7 @@ export default function AboutUs(props: IAboutUsProps) {
                   The Solution to Your Busy Lifestyle
                 </h2>
 
-                <p className="text-xl leading-relaxed ">
+                <p className="text-xl text-gray-700  leading-relaxed ">
                   Our website allows you to track the prices of your desired
                   products on Amazon effortlessly. All you need to do is log in
                   and provide us with the link and price of the product you want
@@ -101,7 +101,7 @@ export default function AboutUs(props: IAboutUsProps) {
       </section>
       <section className="mb-32 text-gray-800 text-center px-[5vw]">
         <h2 className="text-4xl font-bold mb-12">
-          Why is it so<u className="text-blue-600"> great?</u>
+          Why is it so<u className="text-5xl text-blue-600"> great?</u>
         </h2>
         <div className="grid md:grid-cols-3 lg:gap-x-12">
           <div className="mb-12 md:mb-0">

@@ -40,6 +40,22 @@ export const login = async (req: Request, res: Response) => {
     res.status(500).json({ message: error.message });
   }
 };
+export const updateUser = async (req: Request, res: Response) => {
+  try {
+    const { email, userName, userId } = req.body;
+    const update = { email, userName };
+    !email && delete update.email;
+    !userName && delete update.userName;
+    const updateUser = await User.findByIdAndUpdate(userId, update, {
+      new: true,
+    });
+    if (!updateUser)
+      return res.status(400).json({ message: "User does not exist" });
+    res.status(201).json({ message: "updateUser updated", updateUser });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 // export const verfiyToken = async (req: Request, res: Response) => {
 //   const token = req.body.token;

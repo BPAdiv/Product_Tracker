@@ -73,7 +73,7 @@ export default function AddFollowModal({ product }: Product) {
 
       {showModal ? (
         <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none max-h-screen">
             <div className="relative w-auto my-6 mx-auto max-w-3xl p-5">
               {/*content*/}
               <form
@@ -81,7 +81,7 @@ export default function AddFollowModal({ product }: Product) {
                 className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
               >
                 <div className="p-5 border-b">
-                  <h1 className="text-center text-3xl font-semibold">
+                  <h1 className="text-center text-3xl max-md:text-2xl font-semibold">
                     Add New Product
                   </h1>
                 </div>
@@ -91,12 +91,14 @@ export default function AddFollowModal({ product }: Product) {
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                  <p className="my-4 text-slate-500 text-lg max-md:text-base leading-relaxed">
                     {product.title}
                   </p>
                 </div>
                 <div className=" px-6 mb-5">
-                  <h1 className="mb-3  text-lg font-semibold">Current price</h1>
+                  <h1 className="mb-3  text-lg max-md:text-base font-semibold">
+                    Current price
+                  </h1>
                   <input
                     value={product.currentPrice || "nope"}
                     className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 focus:border-blue-500 leading-tight focus:outline-none focus:shadow-outline"
@@ -107,7 +109,7 @@ export default function AddFollowModal({ product }: Product) {
                     disabled
                     onChange={(e) => setNewTargetPrice(Number(e.target.value))}
                   />
-                  <h1 className="mb-3  text-lg font-semibold">
+                  <h1 className="mb-3 max-md:text-base  text-lg font-semibold">
                     Enter your target price
                   </h1>
                   <input

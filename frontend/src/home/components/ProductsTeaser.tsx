@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import CardCarusel from "./CardCarusel";
 import { IProductProps } from "../../types";
-import Card from "./Card";
+import Card from "../../general/Card";
 
 export interface IProductsTeaser {
   sectionName: string;

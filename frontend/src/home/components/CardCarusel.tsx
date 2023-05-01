@@ -3,7 +3,7 @@ import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import Next from "../../assets/icons8-next-page-50.png";
 import Prev from "../../assets/icons8-back-to-50.png";
-import Card from "./Card";
+import Card from "../../general/Card";
 import { IProductProps } from "../../types";
 // export interface IUser {
 //   _id: string;

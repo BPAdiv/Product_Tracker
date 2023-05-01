@@ -9,13 +9,17 @@ export const globalLink = "https://www.amazon.com/dp/";
 const extractProductAsin = (productLink: string): string | boolean => {
   // const url =
   //   "https://www.amazon.com/-/he/60716_BLACK/dp/B0B1TZZPYJ/ref=sr_1_3?crid=30MH2CWLQPC9V&keywords=jeep+wrangler+accessories&qid=1679569046&sprefix=%2Caps%2C181&sr=8-3";
-  const regex = RegExp("(?:dp|gp/product)(?:/glance)?/(\\w{10})");
-  const m = productLink.match(regex);
-  if (m) {
-    console.log("ASIN=" + m[1]);
-    return m[1];
+  try {
+    const regex = RegExp("(?:dp|gp/product)(?:/glance)?/(\\w{10})");
+    const m = productLink.match(regex);
+    if (m) {
+      console.log("ASIN=" + m[1]);
+      return m[1];
+    }
+    return false;
+  } catch (error) {
+    return false;
   }
-  return false;
 };
 
 export const verifyProduct = async (req: Request, res: Response) => {

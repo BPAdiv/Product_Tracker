@@ -1,40 +1,13 @@
 import { useContext } from "react";
-import { IProductProps } from "../../types";
+import { IProductProps } from "../types";
 import addIcon from "../../assets/icons8-add-new-48.png";
 import editIcon from "../../assets/icons8-pen-squared-32.png";
-import AddFollowModal from "../../general/AddFollowModal";
-import EditTargetPrice from "../../general/EditTargetPrice";
-import { UserContext } from "../../contexts/userContext";
-import DeleteProductModal from "../../general/DeleteProductModal";
+import AddFollowModal from "./AddFollowModal";
+import EditTargetPrice from "./EditTargetPrice";
+import { UserContext } from "../contexts/userContext";
+import DeleteProductModal from "./DeleteProductModal";
 import { useNavigate } from "react-router-dom";
-// export interface IUser {
-//   _id: string;
-//   email: string;
-//   password: string;
-//   userName: string;
-//   telegramId: string;
-//   role?: string;
-//   phoneNumber?: string;
-//   country?: string;
-// }
-// export interface IFollowUser {
-//   userId: IUser | string;
-//   targetPrice: number;
-// }
-// export interface IProductProps {
-//   _id: string;
-//   productAsin: string;
-//   image?: string;
-//   title?: string;
-//   previousPrice?: string;
-//   currentPrice?: string;
-//   createdAt: Date;
-//   lastUpdated?: Date;
-//   category?: string;
-//   company?: string;
-//   country?: string;
-//   followers: IFollowUser[];
-// }
+
 type Product = {
   product: IProductProps;
 };
@@ -62,7 +35,7 @@ export default function Card({ product }: Product) {
         )}
       </div>
       <a
-        href={`product/${product.productAsin}`}
+        href={`${window.location.origin}/product/${product.productAsin}`}
         className="w-full h-[7vw] min-h-[5rem] mb-2 cursor-pointer block"
       >
         <img
@@ -73,7 +46,7 @@ export default function Card({ product }: Product) {
       </a>
       <div className="flex flex-col ">
         <a
-          href={`product/${product.productAsin}`}
+          href={`${window.location.origin}/product/${product.productAsin}`}
           className="my-3 cursor-pointer"
         >
           <h5 className="text-base max-sm:text-sm font-semibold tracking-tight text-gray-900  line-clamp-2 ">
@@ -81,7 +54,7 @@ export default function Card({ product }: Product) {
           </h5>
         </a>
         <a
-          href={`product/${product.productAsin}`}
+          href={`${window.location.origin}/product/${product.productAsin}`}
           className="flex items-center cursor-pointer "
         >
           <span className="bg-blue-100 text-blue-800 text-xs font-semibold  rounded  p-1 ">
@@ -95,12 +68,16 @@ export default function Card({ product }: Product) {
           <span className="text-base font-bold text-gray-900 ">
             {product.currentPrice}
           </span>
-          <a
-            href={`product/${product.productAsin}`}
-            className="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none  focus:ring-blue-300 font-medium rounded text-xs lg:text-sm p-[0.3em] text-center"
-          >
-            Buy Now
-          </a>
+          {product.currentPrice.includes("$") ? (
+            <a
+              href={`${window.location.origin}/product/${product.productAsin}`}
+              className="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none  focus:ring-blue-300 font-medium rounded text-xs lg:text-sm p-[0.3em] text-center"
+            >
+              Buy Now
+            </a>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

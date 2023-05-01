@@ -28,7 +28,8 @@
     "node-telegram-bot-api": "^0.61.0",
     "node-telegram-operation-manager": "^1.2.0",
     "nodemon": "^2.0.21",
-    "rimraf": "^5.0.0"
+    "rimraf": "^5.0.0",
+    "timeago.js": "^4.0.2"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

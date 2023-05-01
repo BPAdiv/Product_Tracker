@@ -17,8 +17,8 @@ const app = express();
 mongoose
   .connect(process.env.MONGO as string, {})
   .then(() => {
-    getAmazonLinks();
-    setInterval(getAmazonLinks, 43200000);
+    // getAmazonLinks();
+    // setInterval(getAmazonLinks, 43200000);
     activateBot();
     console.log("connected");
   })

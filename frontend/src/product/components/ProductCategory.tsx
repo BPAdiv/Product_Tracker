@@ -1,5 +1,5 @@
 import * as React from "react";
-import Card from "../../home/components/Card";
+import Card from "../../general/Card";
 import { IProductProps } from "../../types";
 import { ProductPageProps } from "../ProductPage";
 

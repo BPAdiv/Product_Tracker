@@ -60,7 +60,7 @@ export default function EditTargetPrice({ product }: Product) {
       </button>
       {showModal ? (
         <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none max-h-screen">
             <div className="relative w-auto my-6 mx-auto max-w-3xl p-5">
               {/*content*/}
               <form
@@ -68,22 +68,26 @@ export default function EditTargetPrice({ product }: Product) {
                 className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
               >
                 <div className="p-5 border-b">
-                  <h1 className="text-center text-3xl font-semibold">
+                  <h1 className="text-center text-3xl max-md:text-2xl font-semibold">
                     Edit Product Target Price
                   </h1>
                 </div>
                 {/*header*/}
                 <div className="flex items-center justify-center p-5 border-b border-solid border-slate-200 rounded-t">
-                  <img src={product.image} alt="" />
+                  <img
+                    className="max-h-96 max-md:max-h-40 object-contain"
+                    src={product.image}
+                    alt=""
+                  />
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                  <p className="my-4 text-slate-500 text-lg max-md:text-base leading-relaxed">
                     {product.title}
                   </p>
                 </div>
                 <div className=" px-6 mb-5">
-                  <h1 className="mb-3  text-lg font-semibold">
+                  <h1 className="mb-3  text-lg max-md:text-base font-semibold">
                     Previous target price
                   </h1>
                   <input
@@ -105,7 +109,7 @@ export default function EditTargetPrice({ product }: Product) {
                     disabled
                     onChange={(e) => setNewTargetPrice(Number(e.target.value))}
                   />
-                  <h1 className="mb-3  text-lg font-semibold">
+                  <h1 className="mb-3  text-lg max-md:text-base font-semibold">
                     New target price
                   </h1>
                   <input

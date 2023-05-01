@@ -8,6 +8,7 @@ import NeedToLogin from "../general/NeedToLogin";
 import Footer from "../general/Footer";
 import ConnectTelegram from "../general/ConnectTelegram";
 import Testing from "./components/TelegramWidget";
+import UpdateUserModal from "./components/UpdateUserModal";
 
 // export interface IAppProps {}
 

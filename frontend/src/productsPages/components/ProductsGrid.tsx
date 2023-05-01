@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import productBanner from "../../assets/josh-marshall-lLOZVSa7DGU-unsplash.jpg";
 import axios from "axios";
 import { IProductProps } from "../../types";
-import Card from "../../home/components/Card";
+import Card from "../../general/Card";
 import SortProducts from "./SortProducts";
 import ProductsTabs from "./ProductsTabs";
 import ProductsHero from "./ProductsHero";

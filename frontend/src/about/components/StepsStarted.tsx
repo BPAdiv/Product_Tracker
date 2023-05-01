@@ -11,7 +11,7 @@ export default function StartSteps(props: IStartStepsProps) {
       <div className="block rounded-lg shadow-lg bg-white">
         <div className="flex  flex-wrap-reverse items-center border rounded-lg">
           <div className="grow-0 shrink-0 basis-auto w-full md:w-8/12">
-            <div className="px-6 py-12 md:px-12">
+            <div className="px-6 py-12 md:px-12 max-sm:text-left">
               <h2 className="text-3xl font-bold mb-6 text-blue-600">
                 Here are the steps
               </h2>
@@ -54,7 +54,7 @@ export default function StartSteps(props: IStartStepsProps) {
                   </p>
                 </div>
                 <div className="max-w-3xl mt-5">
-                  <p className=" text-xl font-semibold">
+                  <p className=" text-xl font-semibold max-sm:text-center">
                     With these three simple steps, you can effortlessly track
                     the prices of your desired products on Amazon and save time
                     and money. Join our community of savvy shoppers today and
