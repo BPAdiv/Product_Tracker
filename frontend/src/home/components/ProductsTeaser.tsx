@@ -15,8 +15,10 @@ export default function ProductsTeaser({
   linkTo,
 }: IProductsTeaser) {
   return (
-    <div className="hot my-[4vw]">
-      <div className="flex justify-between items-center my-2 py-1 border-b-gray-300 border-b ">
+    <div className={`${linkTo} my-[4vw]  `}>
+      <div
+        className={` flex justify-between items-center my-2 py-1 border-b-gray-300 border-b `}
+      >
         <p className="text-2xl font-bold">{sectionName}</p>
         <NavLink
           to="/products"

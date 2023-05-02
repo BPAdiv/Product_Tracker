@@ -20,7 +20,7 @@ export default function NavBar() {
       <div>
         <nav className="bg-white border-gray-200 ">
           <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xxl px-4 md:px-6 py-2.5">
-            <a href="/" className="flex items-center">
+            <a href="/" className="flex items-center step-1">
               <img
                 src={bargainHiveLogo}
                 className="h-6 mr-3 sm:h-9"
@@ -33,7 +33,7 @@ export default function NavBar() {
             <div className="flex items-center max-sm:w-full ">
               <a
                 href="/getStarted"
-                className="mr-6 text-sm font-medium text-gray-500  hover:underline"
+                className="mr-6 text-sm font-medium text-gray-500  hover:underline step-2"
               >
                 How To Start
               </a>

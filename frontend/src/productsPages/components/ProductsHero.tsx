@@ -4,6 +4,7 @@ import productHot from "../../assets/alejandro-luengo--c1-ZT-hLzM-unsplash.jpg";
 import productPop from "../../assets/derick-david-paSLTZpHCdo-unsplash.jpg";
 import { IAllProductsPageProps } from "../AllProductsPage";
 import { ProductsContext } from "../../contexts/productsContext";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function ProductsHero({
   currentProducts,
@@ -45,11 +46,19 @@ export default function ProductsHero({
         </div>
         <div className="flex gap-10 max-sm:flex-col">
           <div className="w-1/2 relative max-sm:w-full max-sm:h-1/2">
-            <img
+            <LazyLoadImage
+              className="w-full h-full object-cover"
+              src={productHot}
+              // effect="opacity"
+              alt="productHotImg"
+            />
+            {/* <img
               className="w-full h-full object-cover"
               src={productHot}
               alt="productHotImg"
-            />
+              loading="lazy"
+              
+            /> */}
             <button
               onClick={handleHotClick}
               className="absolute inset-0 w-full h-full flex flex-col justify-end items-center bg-black bg-opacity-20 hover:bg-opacity-40 group cursor-pointer duration-300 ease-in-out"
@@ -66,11 +75,17 @@ export default function ProductsHero({
             </div> */}
           </div>
           <div className="w-1/2 relative max-sm:w-full max-sm:h-1/2 ">
-            <img
+            <LazyLoadImage
+              className="w-full h-full object-cover"
+              src={productPop}
+              // effect="blur"
+              alt="productPopImg"
+            />
+            {/* <img
               className="w-full h-full object-cover "
               src={productPop}
               alt="productPopImg"
-            />
+            /> */}
             <button
               onClick={handlePopClick}
               className="absolute inset-0 w-full h-full flex flex-col justify-end items-center bg-black bg-opacity-10 hover:bg-opacity-40 group cursor-pointer duration-300 ease-in-out"
