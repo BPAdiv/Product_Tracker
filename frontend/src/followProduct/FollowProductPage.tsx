@@ -6,7 +6,7 @@ import MultiStepsForm from "./components/MultiStepForm";
 import Footer from "../general/Footer";
 import NeedToLogin from "../general/NeedToLogin";
 import Loading from "../general/Loading";
-// import ReactJoyride, { CallBackProps } from "react-joyride";
+import ReactJoyride, { CallBackProps } from "react-joyride";
 import { TourGuideContext } from "../contexts/tourGuideContext";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
@@ -33,86 +33,86 @@ export default function FollowProductPage() {
   useAuth();
   const navigate = useNavigate();
   const cookies = new Cookies();
-  // const handleCallback = (data: CallBackProps) => {
-  //   const { action, index, lifecycle, type } = data;
+  const handleCallback = (data: CallBackProps) => {
+    const { action, index, lifecycle, type } = data;
 
-  //   console.log(data);
-  //   if (action === "close" || action === "skip") {
-  //     setTrackProductTour({
-  //       ...trackProductTour,
-  //       run: false,
-  //       tourActive: false,
-  //     });
-  //     cookies.set("usedTrackProductTour", true);
+    console.log(data);
+    if (action === "close" || action === "skip") {
+      setTrackProductTour({
+        ...trackProductTour,
+        run: false,
+        tourActive: false,
+      });
+      cookies.set("usedTrackProductTour", true);
 
-  //     // cookies.set("usedtrackProductTour", true);
-  //     return;
-  //   }
-  //   if (type === "step:after" && index === 0 /* or step.target === '#home' */) {
-  //     console.log(data);
-  //     setTrackProductTour({ ...trackProductTour, stepIndex: 1 });
-  //   } else if (type === "step:after" && index === 1) {
-  //     console.log(data);
-  //     if (action === "next") {
-  //       setTrackProductTour({ ...trackProductTour, stepIndex: 2 });
-  //     } else {
-  //       setTrackProductTour({ ...trackProductTour, stepIndex: 0 });
-  //     }
-  //   } else if (type === "step:after" && index === 2) {
-  //     if (action === "next") {
-  //       setTrackProductTour({ ...trackProductTour, stepIndex: 3 });
-  //     } else {
-  //       setTrackProductTour({ ...trackProductTour, stepIndex: 1 });
-  //     }
-  //   } else if (type === "step:after" && index === 3) {
-  //     console.log("step-3", data);
-  //     if (action === "next") {
-  //       setTrackProductTour({ ...trackProductTour, stepIndex: 4 });
-  //     } else {
-  //       setTrackProductTour({ ...trackProductTour, stepIndex: 2 });
-  //     }
-  //   } else if (type === "step:after" && index === 4) {
-  //     console.log("this is step to navigatye", data);
-  //     if (action === "next") {
-  //       setTrackProductTour({ ...trackProductTour, stepIndex: 5 });
-  //     } else {
-  //       setTrackProductTour({ ...trackProductTour, stepIndex: 3 });
-  //     }
-  //   } else if (type === "step:after" && index === 5) {
-  //     console.log(data);
-  //     if (action === "next") {
-  //       setTrackProductTour({ ...trackProductTour, stepIndex: 6 });
-  //     } else {
-  //       setTrackProductTour({ ...trackProductTour, stepIndex: 4 });
-  //     }
-  //   } else if (type === "step:after" && index === 6) {
-  //     console.log(data);
-  //     if (action === "next") {
-  //       setTrackProductTour({ ...trackProductTour, stepIndex: 7 });
-  //     } else {
-  //       setTrackProductTour({ ...trackProductTour, stepIndex: 5 });
-  //     }
-  //   } else if (type === "step:after" && index === 7) {
-  //     console.log(data);
-  //     if (action === "next") {
-  //       setTrackProductTour({ ...trackProductTour, stepIndex: 8 });
-  //     } else {
-  //       setTrackProductTour({ ...trackProductTour, stepIndex: 6 });
-  //     }
-  //   } else if (type === "step:after" && index === 8) {
-  //     console.log(data);
-  //     if (action === "prev") {
-  //       setTrackProductTour({ ...trackProductTour, stepIndex: 7 });
-  //     }
-  //   }
-  // };
+      // cookies.set("usedtrackProductTour", true);
+      return;
+    }
+    if (type === "step:after" && index === 0 /* or step.target === '#home' */) {
+      console.log(data);
+      setTrackProductTour({ ...trackProductTour, stepIndex: 1 });
+    } else if (type === "step:after" && index === 1) {
+      console.log(data);
+      if (action === "next") {
+        setTrackProductTour({ ...trackProductTour, stepIndex: 2 });
+      } else {
+        setTrackProductTour({ ...trackProductTour, stepIndex: 0 });
+      }
+    } else if (type === "step:after" && index === 2) {
+      if (action === "next") {
+        setTrackProductTour({ ...trackProductTour, stepIndex: 3 });
+      } else {
+        setTrackProductTour({ ...trackProductTour, stepIndex: 1 });
+      }
+    } else if (type === "step:after" && index === 3) {
+      console.log("step-3", data);
+      if (action === "next") {
+        setTrackProductTour({ ...trackProductTour, stepIndex: 4 });
+      } else {
+        setTrackProductTour({ ...trackProductTour, stepIndex: 2 });
+      }
+    } else if (type === "step:after" && index === 4) {
+      console.log("this is step to navigatye", data);
+      if (action === "next") {
+        setTrackProductTour({ ...trackProductTour, stepIndex: 5 });
+      } else {
+        setTrackProductTour({ ...trackProductTour, stepIndex: 3 });
+      }
+    } else if (type === "step:after" && index === 5) {
+      console.log(data);
+      if (action === "next") {
+        setTrackProductTour({ ...trackProductTour, stepIndex: 6 });
+      } else {
+        setTrackProductTour({ ...trackProductTour, stepIndex: 4 });
+      }
+    } else if (type === "step:after" && index === 6) {
+      console.log(data);
+      if (action === "next") {
+        setTrackProductTour({ ...trackProductTour, stepIndex: 7 });
+      } else {
+        setTrackProductTour({ ...trackProductTour, stepIndex: 5 });
+      }
+    } else if (type === "step:after" && index === 7) {
+      console.log(data);
+      if (action === "next") {
+        setTrackProductTour({ ...trackProductTour, stepIndex: 8 });
+      } else {
+        setTrackProductTour({ ...trackProductTour, stepIndex: 6 });
+      }
+    } else if (type === "step:after" && index === 8) {
+      console.log(data);
+      if (action === "prev") {
+        setTrackProductTour({ ...trackProductTour, stepIndex: 7 });
+      }
+    }
+  };
   return (
     <>
       <NavBar />
 
       {user ? (
         <>
-          {/* <ReactJoyride
+          <ReactJoyride
             callback={(data) => handleCallback(data)}
             continuous
             run={trackProductTour.run}
@@ -127,7 +127,7 @@ export default function FollowProductPage() {
             //     textColor: theme.white,
             //   },
             // }}
-          /> */}
+          />
           <MultiStepsForm />
         </>
       ) : (
