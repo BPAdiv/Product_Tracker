@@ -5,7 +5,7 @@ import AboutUs from "./components/AboutUs";
 import AboutHeader from "./components/AboutHeader";
 import StartSteps from "./components/StepsStarted";
 import { useAuth } from "../hooks/useAuth";
-import ReactJoyride, { CallBackProps, Step } from "react-joyride";
+// import ReactJoyride, { CallBackProps, Step } from "react-joyride";
 import { useNavigate } from "react-router-dom";
 import { TourGuideContext } from "../contexts/tourGuideContext";
 import Cookies from "universal-cookie";
@@ -15,81 +15,81 @@ export default function GetStartedPage() {
   const { homeTour, setHomeTour } = React.useContext(TourGuideContext);
   const navigate = useNavigate();
   const cookies = new Cookies();
-  const handleCallback = (data: CallBackProps) => {
-    const { action, index, lifecycle, type } = data;
-    console.log(data);
-    if (action === "close" || action === "skip") {
-      setHomeTour({ ...homeTour, run: false, tourActive: false });
-      cookies.set("usedHomeTour", true);
+  // const handleCallback = (data: CallBackProps) => {
+  //   const { action, index, lifecycle, type } = data;
+  //   console.log(data);
+  //   if (action === "close" || action === "skip") {
+  //     setHomeTour({ ...homeTour, run: false, tourActive: false });
+  //     cookies.set("usedHomeTour", true);
 
-      return;
-    }
-    if (type === "step:after" && index === 0 /* or step.target === '#home' */) {
-      console.log(data);
-      setHomeTour({ ...homeTour, stepIndex: 1 });
-    } else if (type === "step:after" && index === 1) {
-      console.log(data);
-      if (action === "next") {
-        setHomeTour({ ...homeTour, stepIndex: 2 });
-      } else {
-        setHomeTour({ ...homeTour, stepIndex: 0 });
-      }
-    } else if (type === "step:after" && index === 2) {
-      if (action === "next") {
-        setHomeTour({ ...homeTour, stepIndex: 3 });
-      } else {
-        setHomeTour({ ...homeTour, stepIndex: 1 });
-      }
-    } else if (type === "step:after" && index === 3) {
-      console.log("step-3", data);
-      if (action === "next") {
-        setHomeTour({ ...homeTour, stepIndex: 4 });
-      } else {
-        setHomeTour({ ...homeTour, stepIndex: 2 });
-      }
-    } else if (type === "step:after" && index === 4) {
-      console.log("this is step to navigatye", data);
-      if (action === "next") {
-        setHomeTour({ ...homeTour, stepIndex: 5 });
-        navigate("/getstarted");
-      } else {
-        setHomeTour({ ...homeTour, stepIndex: 3 });
-      }
-    } else if (type === "step:after" && index === 5) {
-      console.log(data);
-      if (action === "next") {
-        setHomeTour({ ...homeTour, stepIndex: 6 });
-      } else {
-        navigate("/");
-        setHomeTour({ ...homeTour, stepIndex: 4 });
-      }
-    } else if (type === "step:after" && index === 6) {
-      console.log(data);
-      if (action === "next") {
-        setHomeTour({ ...homeTour, stepIndex: 7 });
-      } else {
-        setHomeTour({ ...homeTour, stepIndex: 5 });
-      }
-    } else if (type === "step:after" && index === 7) {
-      console.log(data);
-      if (action === "next") {
-        setHomeTour({ ...homeTour, stepIndex: 8 });
-      } else {
-        setHomeTour({ ...homeTour, stepIndex: 6 });
-      }
-    } else if (type === "step:after" && index === 8) {
-      console.log(data);
-      if (action === "prev") {
-        setHomeTour({ ...homeTour, stepIndex: 7 });
-      } else {
-        setHomeTour({ ...homeTour, stepIndex: 0, run: false });
-        cookies.set("usedHomeTour", true);
-      }
-    }
-    //  else if (action === "reset" || lifecycle === "complete") {
-    //   setHomeTour({ ...homeTour, run: false, stepIndex: 0, tourActive: false });
-    // }
-  };
+  //     return;
+  //   }
+  //   if (type === "step:after" && index === 0 /* or step.target === '#home' */) {
+  //     console.log(data);
+  //     setHomeTour({ ...homeTour, stepIndex: 1 });
+  //   } else if (type === "step:after" && index === 1) {
+  //     console.log(data);
+  //     if (action === "next") {
+  //       setHomeTour({ ...homeTour, stepIndex: 2 });
+  //     } else {
+  //       setHomeTour({ ...homeTour, stepIndex: 0 });
+  //     }
+  //   } else if (type === "step:after" && index === 2) {
+  //     if (action === "next") {
+  //       setHomeTour({ ...homeTour, stepIndex: 3 });
+  //     } else {
+  //       setHomeTour({ ...homeTour, stepIndex: 1 });
+  //     }
+  //   } else if (type === "step:after" && index === 3) {
+  //     console.log("step-3", data);
+  //     if (action === "next") {
+  //       setHomeTour({ ...homeTour, stepIndex: 4 });
+  //     } else {
+  //       setHomeTour({ ...homeTour, stepIndex: 2 });
+  //     }
+  //   } else if (type === "step:after" && index === 4) {
+  //     console.log("this is step to navigatye", data);
+  //     if (action === "next") {
+  //       setHomeTour({ ...homeTour, stepIndex: 5 });
+  //       navigate("/getstarted");
+  //     } else {
+  //       setHomeTour({ ...homeTour, stepIndex: 3 });
+  //     }
+  //   } else if (type === "step:after" && index === 5) {
+  //     console.log(data);
+  //     if (action === "next") {
+  //       setHomeTour({ ...homeTour, stepIndex: 6 });
+  //     } else {
+  //       navigate("/");
+  //       setHomeTour({ ...homeTour, stepIndex: 4 });
+  //     }
+  //   } else if (type === "step:after" && index === 6) {
+  //     console.log(data);
+  //     if (action === "next") {
+  //       setHomeTour({ ...homeTour, stepIndex: 7 });
+  //     } else {
+  //       setHomeTour({ ...homeTour, stepIndex: 5 });
+  //     }
+  //   } else if (type === "step:after" && index === 7) {
+  //     console.log(data);
+  //     if (action === "next") {
+  //       setHomeTour({ ...homeTour, stepIndex: 8 });
+  //     } else {
+  //       setHomeTour({ ...homeTour, stepIndex: 6 });
+  //     }
+  //   } else if (type === "step:after" && index === 8) {
+  //     console.log(data);
+  //     if (action === "prev") {
+  //       setHomeTour({ ...homeTour, stepIndex: 7 });
+  //     } else {
+  //       setHomeTour({ ...homeTour, stepIndex: 0, run: false });
+  //       cookies.set("usedHomeTour", true);
+  //     }
+  //   }
+  //   //  else if (action === "reset" || lifecycle === "complete") {
+  //   //   setHomeTour({ ...homeTour, run: false, stepIndex: 0, tourActive: false });
+  //   // }
+  // };
 
   React.useEffect(() => {
     if (homeTour.stepIndex === 5) {
@@ -144,7 +144,7 @@ export default function GetStartedPage() {
   return (
     <>
       <NavBar />
-      <ReactJoyride
+      {/* <ReactJoyride
         callback={(data) => handleCallback(data)}
         continuous
         run={homeTour.run}
@@ -160,7 +160,7 @@ export default function GetStartedPage() {
         //     textColor: theme.white,
         //   },
         // }}
-      />
+      /> */}
       <AboutHeader />
       <AboutUs />
       <StartSteps />
