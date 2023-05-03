@@ -17,6 +17,7 @@ import ProductsContextProvider, {
   ProductsContext,
 } from "./contexts/productsContext";
 import GetStartedPage from "./about/GetStartedPage";
+import TourGuideProvider from "./contexts/tourGuideContext";
 
 const router = createBrowserRouter([
   {
@@ -60,7 +61,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <UserProvider>
       <ProductsContextProvider>
-        <RouterProvider router={router} />
+        <TourGuideProvider>
+          <RouterProvider router={router} />
+        </TourGuideProvider>
       </ProductsContextProvider>
     </UserProvider>
   </React.StrictMode>

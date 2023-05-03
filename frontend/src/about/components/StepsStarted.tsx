@@ -4,11 +4,11 @@ export interface IStartStepsProps {}
 
 export default function StartSteps(props: IStartStepsProps) {
   return (
-    <section className="mb-32 text-gray-800 text-center md:text-left px-[5vw]">
+    <section className="mb-32 text-gray-800 text-center md:text-left px-[5vw] ">
       <h2 className="text-4xl font-bold mb-16 text-center  ">
         So how to get started?
       </h2>
-      <div className="block rounded-lg shadow-lg bg-white">
+      <div className="block rounded-lg shadow-lg bg-white about-step-2">
         <div className="flex  flex-wrap-reverse items-center border rounded-lg">
           <div className="grow-0 shrink-0 basis-auto w-full md:w-8/12">
             <div className="px-6 py-12 md:px-12 max-sm:text-left">

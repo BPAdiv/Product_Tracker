@@ -1,8 +1,9 @@
 import axios, { AxiosResponse } from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IProductFormDetails, typeProductDetailsProps } from "./MultiStepForm";
 import Searching from "../../assets/72785-searching.gif";
 import swal from "sweetalert";
+import { TourGuideContext } from "../../contexts/tourGuideContext";
 // export interface IEnterProductProps {}
 interface IProductFormTemp extends IProductFormDetails {
   [key: string]: any;
@@ -14,9 +15,12 @@ export default function EnterProduct({
   setProductDetails,
 }: typeProductDetailsProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const { trackProductTour, setTrackProductTour } =
+    useContext(TourGuideContext);
   const verifyAmazonProduct = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
     e.preventDefault();
+    setTrackProductTour({ ...trackProductTour, run: false });
     if (!productDetails.productLink || !productDetails.targetPrice)
       return alert("target Price and Link required");
 
@@ -27,6 +31,7 @@ export default function EnterProduct({
       );
       setProductDetails((prev) => ({ ...prev, ...data }));
       console.log(data);
+
       setFormStep(2);
       setIsLoading(false);
     } catch (error: any) {
@@ -80,7 +85,7 @@ export default function EnterProduct({
             className=" px-8 pt-6 pb-8 mb-4 flex flex-col gap-7"
             onSubmit={(e) => verifyAmazonProduct(e)}
           >
-            <div className="mb-4">
+            <div className="mb-4 follow-step-2">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="productLink"
@@ -91,13 +96,13 @@ export default function EnterProduct({
                 value={productDetails.productLink}
                 className="resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:border-blue-500 focus:outline-none focus:shadow-outline"
                 id="productLink"
-                placeholder="www.amazon.com/Product"
+                placeholder="https://www.amazon.com/AmazonBasics-Matte-Keyboard-QWERTY-Layout/dp/B07WJ5D3H4"
                 rows={3}
                 onChange={(e) => handleChangeInput(e)}
                 required
               />
             </div>
-            <div className="mb-6">
+            <div className="mb-6 follow-step-3">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="targetPrice"
@@ -116,7 +121,7 @@ export default function EnterProduct({
             </div>
             <div className="flex items-center justify-center">
               <button
-                className="bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline follow-step-4"
                 type="submit"
               >
                 Next

@@ -1,8 +1,9 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { typeProductDetailsProps } from "./MultiStepForm";
 import waiting from "../../assets/13520-blue-bird-waiting.gif";
 import swal from "sweetalert";
+import { TourGuideContext } from "../../contexts/tourGuideContext";
 // export interface IVerifyProductProps {}
 
 export default function VerifyProduct({
@@ -12,9 +13,18 @@ export default function VerifyProduct({
   setProductDetails,
 }: typeProductDetailsProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const { trackProductTour, setTrackProductTour } =
+    useContext(TourGuideContext);
+
+  useEffect(() => {
+    if (trackProductTour.run === false && trackProductTour.stepIndex === 4) {
+      setTrackProductTour({ ...trackProductTour, run: true, stepIndex: 5 });
+    }
+  }, []);
 
   const confirmProduct = async () => {
     setIsLoading(true);
+    setTrackProductTour({ ...trackProductTour, run: false });
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/product/followProduct`,
@@ -63,7 +73,7 @@ export default function VerifyProduct({
               alt=""
             />
           </div>
-          <form className=" px-8 pt-6 pb-8 mb-4 flex flex-col gap-7">
+          <form className=" px-8 pt-6 pb-8 mb-4 flex flex-col gap-7 follow-step-5">
             <div className="">
               <label
                 className="block text-gray-700 text-base font-bold mb-2"
@@ -117,7 +127,7 @@ export default function VerifyProduct({
               </button>
               <button
                 onClick={confirmProduct}
-                className="bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline follow-step-6"
                 type="button"
               >
                 Verify

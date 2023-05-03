@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from "../contexts/userContext";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import bargainHiveLogo from "../assets/icons8-hive-64.png";
 import { useAuth } from "../hooks/useAuth";
 // export interface INavBarProps {
@@ -15,6 +15,7 @@ export default function NavBar() {
   };
 
   const { logout } = useAuth();
+  const navigate = useNavigate();
   return (
     <>
       <div>
@@ -31,16 +32,17 @@ export default function NavBar() {
               </span>
             </a>
             <div className="flex items-center max-sm:w-full ">
-              <a
-                href="/getStarted"
-                className="mr-6 text-sm font-medium text-gray-500  hover:underline step-2"
+              <button
+                onClick={() => navigate("/getStarted")}
+                // href="/getStarted"
+                className="mr-6 text-sm font-medium text-gray-500  hover:underline start-step-1"
               >
                 How To Start
-              </a>
+              </button>
               {!user ? (
                 <a
                   href="/account/login"
-                  className="text-sm font-medium text-blue-600  hover:underline max-sm:ml-auto"
+                  className="text-sm font-medium text-blue-600  hover:underline max-sm:ml-auto login-step-1"
                 >
                   Login
                 </a>
@@ -68,7 +70,7 @@ export default function NavBar() {
         <nav className="bg-gray-50 ">
           <div className="max-w-screen-xxl px-4 py-3 mx-auto md:px-6">
             <div className="flex items-center">
-              <ul className="flex flex-row flex-wrap   mt-0 mr-6 gap-4 text-sm font-medium">
+              <ul className="flex flex-row flex-wrap   mt-0 mr-6 gap-4 text-sm font-medium nav-step-3">
                 <li>
                   <a
                     href="/"
@@ -99,7 +101,7 @@ export default function NavBar() {
                     Hot
                   </NavLink>
                 </li>
-                <li>
+                <li className="nav-step-2">
                   <NavLink
                     to="/products"
                     state={{ productTab: "all" }}

@@ -1,11 +1,21 @@
 import * as React from "react";
 import Confirmed from "../../assets/56149-amazon-tag.gif";
+import { TourGuideContext } from "../../contexts/tourGuideContext";
 
 export interface IConfirmProductProps {}
 
 export default function ConfirmProduct(props: IConfirmProductProps) {
+  const { trackProductTour, setTrackProductTour } =
+    React.useContext(TourGuideContext);
+
+  React.useEffect(() => {
+    if (trackProductTour.run === false && trackProductTour.stepIndex === 6) {
+      setTrackProductTour({ ...trackProductTour, run: true, stepIndex: 7 });
+    }
+  }, []);
+
   return (
-    <div className="w-full max-w-2xl bg-white shadow-md rounded   py-5">
+    <div className="w-full max-w-2xl bg-white shadow-md rounded   py-5 ">
       <div className="flex flex-col pb-5">
         <div className="text-center my-8 font-bold text-xl">
           <h1>Product confirmed and added to your following </h1>

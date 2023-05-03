@@ -16,7 +16,7 @@ export default function AboutHeader(props: IAboutHeaderProps) {
       ></div>
 
       <div className="container mx-auto px-6 md:px-12 xl:px-32">
-        <div className="text-center text-gray-800">
+        <div className="text-center text-gray-800 about-step-1">
           <div
             className="block rounded-lg shadow-lg px-6 py-12 md:py-16 md:px-12"
             style={{

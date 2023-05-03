@@ -4,7 +4,7 @@ interface StepperProps {
 }
 export default function ProgressStepper({ formStep }: StepperProps) {
   return (
-    <ol className="flex  w-full  max-w-2xl bg-white shadow-md rounded  ">
+    <ol className="flex  w-full  max-w-2xl bg-white shadow-md rounded follow-step-1  ">
       <li
         className={`w-1/3 flex items-center text-white space-x-2.5 ${
           formStep === 1 ? "bg-blue-900" : "bg-blue-800 bg-opacity-75 "
