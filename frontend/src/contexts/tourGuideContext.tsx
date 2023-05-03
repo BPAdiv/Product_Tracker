@@ -5,13 +5,14 @@ import {
   SetStateAction,
   useState,
 } from "react";
-import { CallBackProps, Step } from "react-joyride";
+// import { CallBackProps, Step } from "react-joyride";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
 type appState = {
   run: boolean;
   stepIndex: number;
-  steps: Step[];
+  steps: any;
+  // steps: Step[];
   tourActive: boolean;
 };
 export interface TourGuideContextInterface {
@@ -31,7 +32,7 @@ export const TourGuideContext = createContext<TourGuideContextInterface>(null!);
 export default function TourGuideProvider({
   children,
 }: TourGuideProviderProps) {
-  const homeSteps: Step[] = [
+  const homeSteps = [
     {
       target: "body",
       placement: "center",
@@ -109,7 +110,7 @@ export default function TourGuideProvider({
       styles: { buttonNext: { display: "none" } },
     },
   ];
-  const trackProductSteps: Step[] = [
+  const trackProductSteps = [
     {
       target: "body",
       placement: "center",
