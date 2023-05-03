@@ -61,9 +61,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <UserProvider>
       <ProductsContextProvider>
-        <TourGuideProvider>
-          <RouterProvider router={router} />
-        </TourGuideProvider>
+        {/* <TourGuideProvider> */}
+        <RouterProvider router={router} />
+        {/* </TourGuideProvider> */}
       </ProductsContextProvider>
     </UserProvider>
   </React.StrictMode>
