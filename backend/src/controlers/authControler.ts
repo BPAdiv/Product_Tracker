@@ -8,11 +8,22 @@ import jwt, { JwtPayload, Secret } from "jsonwebtoken";
 import sgMail from "@sendgrid/mail";
 sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
 
+interface ItempUser {
+  email: string;
+  password: string;
+  userName: string;
+  telegramId?: string;
+}
+
 export const register = async (req: Request, res: Response) => {
   try {
-    const { email, password, userName } = req.body;
+    const { email, password, userName, telegramId } = req.body;
     const hash = await bcrypt.hash(password, 10);
-    const newUser = new User({ email, password: hash, userName });
+    const tempUser: ItempUser = { email, password: hash, userName };
+    if (telegramId) {
+      tempUser.telegramId = telegramId;
+    }
+    const newUser = new User(tempUser);
     const savedUser = await newUser.save();
     if (!savedUser)
       return res.status(400).json({ message: "User already exist" });
@@ -35,6 +46,19 @@ export const login = async (req: Request, res: Response) => {
     if (!bycryptPassword)
       return res.status(400).json({ message: "Invalid password or email" });
     const token = jwt.sign({ id: loginUser._id }, process.env.JWT_ as string);
+    if (req.body.telegramId) {
+      loginUser.telegramId = req.body.telegramId;
+      const savedUserLogin = await loginUser.save();
+      if (!savedUserLogin) {
+        return res
+          .status(200)
+          .json({
+            message: "You are In but could not update telegramId",
+            data: loginUser,
+            token,
+          });
+      }
+    }
     res.status(200).json({ message: "You are In", data: loginUser, token });
   } catch (error: any) {
     res.status(500).json({ message: error.message });

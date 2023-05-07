@@ -269,6 +269,7 @@ export const activateBot = () => {
           {
             email: context[chatId].email,
             password: context[chatId].password,
+            telegramId: chatId.toString(),
           }
         );
         console.log(data);
@@ -308,6 +309,7 @@ export const activateBot = () => {
             email: context[chatId].email,
             password: context[chatId].password,
             userName: context[chatId].userName,
+            telegramId: chatId.toString(),
           }
         );
         console.log(data);
