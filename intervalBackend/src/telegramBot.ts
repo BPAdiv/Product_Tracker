@@ -118,7 +118,7 @@ export const activateBot = () => {
         try {
           bot.sendMessage(chatId, "Searching...");
           const { data } = await axios.post(
-            "http://localhost:8000/api/product/verifyProduct",
+            "${process.env.VITE_BACKEND_URL}/api/product/verifyProduct",
             {
               targetPrice: context[chatId].verifyProduct?.targetPrice,
               productLink: context[chatId].verifyProduct?.productLink,
@@ -180,7 +180,7 @@ export const activateBot = () => {
     //   try {
     //     bot.sendMessage(chatId, "Searching...");
     //     const { data } = await axios.post(
-    //       "http://localhost:8000/api/product/verifyProduct",
+    //       "${process.env.VITE_BACKEND_URL}/api/product/verifyProduct",
     //       {
     //         targetPrice: context[chatId].verifyProduct?.targetPrice,
     //         productLink: context[chatId].verifyProduct?.productLink,
@@ -230,7 +230,7 @@ export const activateBot = () => {
     }
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/api/product/unfollow",
+        "${process.env.VITE_BACKEND_URL}/api/product/unfollow",
         { userId: userId._id, productId: text }
       );
       console.log(data);
@@ -265,7 +265,7 @@ export const activateBot = () => {
       console.log(context[chatId]);
       try {
         const { data } = await axios.post(
-          "http://localhost:8000/api/user/login",
+          `${process.env.VITE_BACKEND_URL}/api/user/login`,
           {
             email: context[chatId].email,
             password: context[chatId].password,
@@ -304,7 +304,7 @@ export const activateBot = () => {
       console.log(context[chatId]);
       try {
         const { data } = await axios.post(
-          "http://localhost:8000/api/user/signup",
+          `${process.env.VITE_BACKEND_URL}/api/user/signup`,
           {
             email: context[chatId].email,
             password: context[chatId].password,
@@ -381,7 +381,7 @@ export const activateBot = () => {
     ) {
       try {
         const { data } = await axios.post(
-          "http://localhost:8000/api/product/followProduct",
+          "${process.env.VITE_BACKEND_URL}/api/product/followProduct",
           context[message.chat.id].tempProduct
         );
         console.log(data);
@@ -465,7 +465,7 @@ export const activateBot = () => {
 
     try {
       const { data } = await axios.get(
-        `http://localhost:8000/api/product/user/${userChecked._id}`
+        `${process.env.VITE_BACKEND_URL}/api/product/user/${userChecked._id}`
       );
       console.log(data);
 
