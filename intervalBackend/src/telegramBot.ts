@@ -118,7 +118,7 @@ export const activateBot = () => {
         try {
           bot.sendMessage(chatId, "Searching...");
           const { data } = await axios.post(
-            "${process.env.VITE_BACKEND_URL}/api/product/verifyProduct",
+            `${process.env.VITE_BACKEND_URL}/api/product/verifyProduct`,
             {
               targetPrice: context[chatId].verifyProduct?.targetPrice,
               productLink: context[chatId].verifyProduct?.productLink,
@@ -230,7 +230,7 @@ export const activateBot = () => {
     }
     try {
       const { data } = await axios.post(
-        "${process.env.VITE_BACKEND_URL}/api/product/unfollow",
+        `${process.env.VITE_BACKEND_URL}/api/product/unfollow`,
         { userId: userId._id, productId: text }
       );
       console.log(data);
@@ -381,7 +381,7 @@ export const activateBot = () => {
     ) {
       try {
         const { data } = await axios.post(
-          "${process.env.VITE_BACKEND_URL}/api/product/followProduct",
+          `${process.env.VITE_BACKEND_URL}/api/product/followProduct`,
           context[message.chat.id].tempProduct
         );
         console.log(data);
@@ -479,7 +479,7 @@ export const activateBot = () => {
         bot.sendPhoto(chatId, pro.image, {
           caption: `${pro.title} \n 
 The current price is : <b>${pro.currentPrice}</b>\n 
-<div>${pro.lastUpdated && `Last updated: ${formatLastUpdated}`}</div>
+${pro.lastUpdated && `Last updated: ${formatLastUpdated}`}
               `,
           parse_mode: "HTML",
           reply_markup: {
