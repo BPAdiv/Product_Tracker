@@ -70,7 +70,7 @@ export default function TourGuideProvider({
     {
       target: ".nav-step-4",
       title: "Easy way to track",
-      placement: "top",
+      placement: "bottom",
       content:
         "Once you would like to track a product you can click here for easy navigation to the track product page",
     },
