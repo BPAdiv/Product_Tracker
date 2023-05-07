@@ -42,21 +42,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAmazonLinks = exports.globalLink = void 0;
 var axios_1 = __importDefault(require("axios"));
 var cheerio_1 = __importDefault(require("cheerio"));
+// import User from "../models/users";
 var products_1 = __importDefault(require("../models/products"));
 // import { globalLink } from "../../controlers/productController";
 var telegramBot_1 = require("../telegramBot");
+var sendGridEmail_1 = require("../sendGridEmail");
 exports.globalLink = "https://www.amazon.com/dp/";
-var setCurrentPriceAndDate = function (productAsin, currentPrice) {
-    try {
-        var product = products_1.default.findOneAndUpdate({ productAsin: productAsin }, { currentPrice: currentPrice, lastUpdated: new Date() });
-        if (!product)
-            return console.log("couldnt find product");
-        console.log("product updated successful");
-    }
-    catch (error) {
-        console.log(error.message);
-    }
-};
+var setCurrentPriceAndDate = function (productAsin, currentPrice) { return __awaiter(void 0, void 0, void 0, function () {
+    var product, error_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, products_1.default.findOneAndUpdate({ productAsin: productAsin }, { currentPrice: currentPrice, lastUpdated: new Date() }, { new: true })];
+            case 1:
+                product = _a.sent();
+                if (!product)
+                    return [2 /*return*/, console.log("couldnt find product")];
+                console.log(product);
+                return [3 /*break*/, 3];
+            case 2:
+                error_1 = _a.sent();
+                console.log(error_1.message);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
 var isPriceLower = function (wholePrice, targetProduct) {
     var productAsin = targetProduct.productAsin, followers = targetProduct.followers, _id = targetProduct._id;
     var currentPrice = wholePrice.replace("$", "");
@@ -65,12 +77,13 @@ var isPriceLower = function (wholePrice, targetProduct) {
         if (numberCurrentPrice < follow.targetPrice) {
             console.log("price lower: " + numberCurrentPrice, " target: " + targetProduct.productAsin, "targetPrice: " + follow.targetPrice);
             (0, telegramBot_1.sendMessageBot)(targetProduct, follow, wholePrice);
+            (0, sendGridEmail_1.sendTrackEmail)(targetProduct, follow, wholePrice);
         }
         else {
             console.log("price not lower: " + follow.targetPrice);
         }
     });
-    setCurrentPriceAndDate(productAsin, currentPrice);
+    setCurrentPriceAndDate(productAsin, wholePrice);
 };
 // let product:IProduct;
 function getProducts(targetProduct) {
@@ -146,30 +159,52 @@ function getProducts(targetProduct) {
         });
     });
 }
+function promisses(productArray) {
+    return __awaiter(this, void 0, void 0, function () {
+        var promises;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    promises = productArray.map(function (element) {
+                        return getProducts(element);
+                    });
+                    return [4 /*yield*/, Promise.all(promises)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
 var getAmazonLinks = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var products, promises, e_1;
+    var products_2, halfLength, firstHalfIndex, secondHalfIndex_1, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 3, , 4]);
+                _a.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, products_1.default.find().populate("followers.userId")];
             case 1:
-                products = _a.sent();
-                if (!products) {
+                products_2 = _a.sent();
+                if (!products_2) {
                     return [2 /*return*/, "has been error finding products links"];
                 }
-                promises = products.map(function (element) {
-                    return getProducts(element);
-                });
-                return [4 /*yield*/, Promise.all(promises)];
+                halfLength = Math.ceil(products_2.length / 2);
+                firstHalfIndex = 0;
+                secondHalfIndex_1 = halfLength;
+                // const promises = products.map((element) => {
+                //   return getProducts(element);
+                // });
+                // await Promise.all(promises);
+                promisses(products_2.slice(firstHalfIndex, secondHalfIndex_1));
+                setTimeout(function () {
+                    promisses(products_2.slice(secondHalfIndex_1, products_2.length));
+                }, 6 * 60 * 60 * 1000);
+                return [3 /*break*/, 3];
             case 2:
-                _a.sent();
-                return [3 /*break*/, 4];
-            case 3:
                 e_1 = _a.sent();
                 console.log(e_1);
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };

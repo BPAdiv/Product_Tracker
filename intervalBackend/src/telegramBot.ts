@@ -470,15 +470,16 @@ export const activateBot = () => {
       console.log(data);
 
       const message = "Here are the products currently being tracked:\n";
-
       bot.sendMessage(chatId, message);
 
       data.products.forEach((pro: IProduct) => {
         if (!pro.image) return;
+        const formatLastUpdated =
+          pro.lastUpdated && format(new Date(pro?.lastUpdated));
         bot.sendPhoto(chatId, pro.image, {
           caption: `${pro.title} \n 
 The current price is : <b>${pro.currentPrice}</b>\n 
-${pro.lastUpdated && `Last updated: ${format(pro?.lastUpdated)}`}
+<div>${pro.lastUpdated && `Last updated: ${formatLastUpdated}`}</div>
               `,
           parse_mode: "HTML",
           reply_markup: {

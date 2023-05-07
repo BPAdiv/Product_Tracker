@@ -16,6 +16,7 @@ mongoose_1.default
     .connect(process.env.MONGO, {})
     .then(function () {
     // getAmazonLinks();
+    // setInterval(getAmazonLinks, 43200000);
     (0, telegramBot_1.activateBot)();
     console.log("connected");
 })
@@ -27,8 +28,10 @@ app.use((0, cors_1.default)()); // allow cors origin
 app.use(express_1.default.json());
 // app.use("/api/user", userRouter);
 // app.use("/api/product", productRouter);
-app.use(express_1.default.json());
-app.listen(8000, function () { return console.log("listen on port 8000"); });
+app.get("/", function (req, res) {
+    res.send("server is live ");
+});
+app.listen(process.env.PORT, function () { return console.log("interval live"); });
 // async function getProducts() {
 //   const { data } = await axios.get(
 //     "https://www.amazon.com/-/he/MacBook-%D7%96%D7%99%D7%9B%D7%A8%D7%95%D7%9F-%D7%90%D7%97%D7%95%D7%A8%D7%99%D7%AA-FaceTime-%D7%90%D7%99%D7%99%D7%A4%D7%95%D7%9F/dp/B08N5LNQCX/ref=sr_1_4?qid=1679261541&s=computers-intl-ship&sr=1-4&language=en_US&currency=USD",

@@ -22,8 +22,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = __importStar(require("mongoose"));
+var users_1 = __importDefault(require("../models/users"));
 var ProductSchema = new mongoose_1.default.Schema({
     productAsin: { type: String, required: true },
     image: { type: String },
@@ -37,7 +41,7 @@ var ProductSchema = new mongoose_1.default.Schema({
     country: { type: String },
     followers: [
         {
-            userId: { type: mongoose_1.Schema.Types.ObjectId, ref: "TrackUser", required: true },
+            userId: { type: mongoose_1.Schema.Types.ObjectId, ref: users_1.default, required: true },
             targetPrice: { type: Number, required: true },
         },
     ],
