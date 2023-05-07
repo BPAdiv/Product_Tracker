@@ -39,7 +39,6 @@ export default function FollowProductPage() {
   const handleCallback = (data: CallBackProps) => {
     const { action, index, lifecycle, type } = data;
 
-    console.log(data);
     if (action === "close" || action === "skip") {
       setTrackProductTour({
         ...trackProductTour,
@@ -52,10 +51,8 @@ export default function FollowProductPage() {
       return;
     }
     if (type === "step:after" && index === 0 /* or step.target === '#home' */) {
-      console.log(data);
       setTrackProductTour({ ...trackProductTour, stepIndex: 1 });
     } else if (type === "step:after" && index === 1) {
-      console.log(data);
       if (action === "next") {
         setTrackProductTour({ ...trackProductTour, stepIndex: 2 });
       } else {
@@ -82,28 +79,24 @@ export default function FollowProductPage() {
         setTrackProductTour({ ...trackProductTour, stepIndex: 3 });
       }
     } else if (type === "step:after" && index === 5) {
-      console.log(data);
       if (action === "next") {
         setTrackProductTour({ ...trackProductTour, stepIndex: 6 });
       } else {
         setTrackProductTour({ ...trackProductTour, stepIndex: 4 });
       }
     } else if (type === "step:after" && index === 6) {
-      console.log(data);
       if (action === "next") {
         setTrackProductTour({ ...trackProductTour, stepIndex: 7 });
       } else {
         setTrackProductTour({ ...trackProductTour, stepIndex: 5 });
       }
     } else if (type === "step:after" && index === 7) {
-      console.log(data);
       if (action === "next") {
         setTrackProductTour({ ...trackProductTour, stepIndex: 8 });
       } else {
         setTrackProductTour({ ...trackProductTour, stepIndex: 6 });
       }
     } else if (type === "step:after" && index === 8) {
-      console.log(data);
       if (action === "prev") {
         setTrackProductTour({ ...trackProductTour, stepIndex: 7 });
       }

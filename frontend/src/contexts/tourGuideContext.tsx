@@ -68,6 +68,13 @@ export default function TourGuideProvider({
         "This is the navigation where you get to the categories above,such as Popular, Hot and All Products",
     },
     {
+      target: ".nav-step-4",
+      title: "Easy way to track",
+      placement: "top",
+      content:
+        "Once you would like to track a product you can click here for easy navigation to the track product page",
+    },
+    {
       target: ".start-step-1",
       title: "Start Page",
       // placement: "bottom",

@@ -36,7 +36,6 @@ export default function MultiStepsForm() {
     productAsin: "",
     userId: user ? user._id : "",
   });
-  console.log(productDetails);
 
   return (
     <>

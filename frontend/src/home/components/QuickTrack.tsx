@@ -34,7 +34,7 @@ export default function QuickTrack() {
             /> */}
             <button
               onClick={() => navigate("/addProduct")}
-              className="focus:outline-none focus:ring-offset-2 focus:ring border border-white sm:border-transparent w-full sm:w-auto bg-white py-4 px-6 hover:bg-opacity-75"
+              className="nav-step-4 focus:outline-none focus:ring-offset-2 focus:ring border border-white sm:border-transparent w-full sm:w-auto bg-white py-4 px-6 hover:bg-opacity-75"
             >
               Track Now
             </button>

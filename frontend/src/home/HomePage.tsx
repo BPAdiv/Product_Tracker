@@ -72,17 +72,14 @@ const HomePage = () => {
   const handleCallback = (data: CallBackProps) => {
     const { action, index, lifecycle, type } = data;
 
-    console.log(data);
     if (action === "close" || action === "skip") {
       setHomeTour({ ...homeTour, run: false, tourActive: false });
       cookies.set("usedHomeTour", true);
       return;
     }
     if (type === "step:after" && index === 0 /* or step.target === '#home' */) {
-      console.log(data);
       setHomeTour({ ...homeTour, stepIndex: 1 });
     } else if (type === "step:after" && index === 1) {
-      console.log(data);
       if (action === "next") {
         setHomeTour({ ...homeTour, stepIndex: 2 });
       } else {
@@ -102,39 +99,42 @@ const HomePage = () => {
         setHomeTour({ ...homeTour, stepIndex: 2 });
       }
     } else if (type === "step:after" && index === 4) {
-      console.log("this is step to navigatye", data);
+      console.log("step-3", data);
       if (action === "next") {
-        setHomeTour({ ...homeTour, run: false, stepIndex: 5 });
-        navigate("/getstarted");
+        setHomeTour({ ...homeTour, stepIndex: 5 });
       } else {
         setHomeTour({ ...homeTour, stepIndex: 3 });
       }
     } else if (type === "step:after" && index === 5) {
-      console.log(data);
+      console.log("this is step to navigatye", data);
       if (action === "next") {
-        setHomeTour({ ...homeTour, stepIndex: 6 });
+        setHomeTour({ ...homeTour, run: false, stepIndex: 6 });
+        navigate("/getstarted");
       } else {
-        navigate("/");
         setHomeTour({ ...homeTour, stepIndex: 4 });
       }
     } else if (type === "step:after" && index === 6) {
-      console.log(data);
       if (action === "next") {
         setHomeTour({ ...homeTour, stepIndex: 7 });
       } else {
+        navigate("/");
         setHomeTour({ ...homeTour, stepIndex: 5 });
       }
     } else if (type === "step:after" && index === 7) {
-      console.log(data);
       if (action === "next") {
         setHomeTour({ ...homeTour, stepIndex: 8 });
       } else {
         setHomeTour({ ...homeTour, stepIndex: 6 });
       }
     } else if (type === "step:after" && index === 8) {
-      console.log(data);
-      if (action === "prev") {
+      if (action === "next") {
+        setHomeTour({ ...homeTour, stepIndex: 9 });
+      } else {
         setHomeTour({ ...homeTour, stepIndex: 7 });
+      }
+    } else if (type === "step:after" && index === 9) {
+      if (action === "prev") {
+        setHomeTour({ ...homeTour, stepIndex: 8 });
       }
     }
     //  else if (action === "reset" || lifecycle === "complete") {
