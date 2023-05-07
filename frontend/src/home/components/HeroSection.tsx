@@ -44,6 +44,7 @@ export default function HeroSection() {
         </div>
         <div className="w-1/2 max-md:w-full  ">
           <img
+            loading="lazy"
             className="w-full h-full max-h-96  object-contain "
             src={heroImg}
             alt="mockup"

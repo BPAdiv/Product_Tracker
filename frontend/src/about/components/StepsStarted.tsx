@@ -71,6 +71,7 @@ export default function StartSteps(props: IStartStepsProps) {
           </div>
           <div className="grow-0 shrink-0 basis-auto block lg:flex w-full md:w-4/12">
             <img
+              loading="lazy"
               src={startIl}
               alt="Trendy Pants and Shoes"
               className="w-full rounded-t-lg md:rounded-tr-none md:rounded-bl-lg"

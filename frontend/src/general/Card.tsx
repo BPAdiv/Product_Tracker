@@ -39,6 +39,7 @@ export default function Card({ product }: Product) {
         className="w-full h-[7vw] min-h-[5rem] mb-2 cursor-pointer block"
       >
         <img
+          loading="lazy"
           className=" rounded-t-lg w-full h-full object-contain "
           src={product.image}
           alt="product image"

@@ -58,6 +58,7 @@ export default function VerifyProduct({
         <div>
           <div>Waiting to confirm...</div>
           <img
+            loading="lazy"
             className="max-h-96 w-full object-contain"
             src={waiting}
             alt=""
@@ -67,6 +68,7 @@ export default function VerifyProduct({
         <>
           <div className="flex justify-center items-center ">
             <img
+              loading="lazy"
               className="object-contain
            w-full h-full max-h-60"
               src={productDetails.productImage}

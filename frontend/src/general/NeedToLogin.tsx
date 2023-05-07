@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 type INeedToLoginProps = {
   isLogin: boolean;
   setIsLogin: Dispatch<SetStateAction<boolean>>;
+  followPage?: boolean;
 };
 
 export default function NeedToLogin({
   isLogin,
   setIsLogin,
+  followPage,
 }: INeedToLoginProps) {
   // const [showModal, setIsLogin] = useState(false);
   const navigate = useNavigate();
@@ -42,9 +44,9 @@ export default function NeedToLogin({
               <button
                 className="text-red-500  bg-white hover:bg-red-50 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg border border-red-200 text-sm font-medium px-5 py-2.5 hover:text-red-700 focus:z-10 dark:bg-gray-700 dark:text-red-300 dark:border-red-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-red-600"
                 type="button"
-                onClick={() => setIsLogin(false)}
+                onClick={() => (followPage ? navigate("/") : setIsLogin(false))}
               >
-                Close
+                {followPage ? "Back Home" : "Close"}
               </button>
               <button
                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

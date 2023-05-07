@@ -61,13 +61,14 @@ export default function UserNewProduct() {
 
         <div className="grid  w-1/2 max-md:w-full grid-cols-2 grid-rows-2  gap-5">
           <img
+            loading="lazy"
             className="row-span-2  object-cover h-full "
             src={img1}
             alt="sofa"
           />
 
-          <img className=" object-contain " src={img2} alt="" />
-          <img className=" object-contain" src={img3} alt="" />
+          <img loading="lazy" className=" object-contain " src={img2} alt="" />
+          <img loading="lazy" className=" object-contain" src={img3} alt="" />
         </div>
       </div>
     </div>

@@ -52,7 +52,7 @@ export default function ProductsHero({
               // effect="opacity"
               alt="productHotImg"
             />
-            {/* <img
+            {/* <img loading="lazy"
               className="w-full h-full object-cover"
               src={productHot}
               alt="productHotImg"
@@ -81,7 +81,7 @@ export default function ProductsHero({
               // effect="blur"
               alt="productPopImg"
             />
-            {/* <img
+            {/* <img loading="lazy"
               className="w-full h-full object-cover "
               src={productPop}
               alt="productPopImg"
@@ -104,6 +104,7 @@ export default function ProductsHero({
       </div>
       <div className="w-1/3 max-lg:hidden">
         <img
+          loading="lazy"
           className="w-full h-full object-cover "
           src={productBanner}
           alt=""

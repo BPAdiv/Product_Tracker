@@ -9,6 +9,7 @@ import ReactJoyride, { CallBackProps, Step } from "react-joyride";
 import { useNavigate } from "react-router-dom";
 import { TourGuideContext } from "../contexts/tourGuideContext";
 import Cookies from "universal-cookie";
+import StartTrackNow from "./components/StartTrackNow";
 
 export default function GetStartedPage() {
   useAuth();
@@ -164,6 +165,7 @@ export default function GetStartedPage() {
       <AboutHeader />
       <AboutUs />
       <StartSteps />
+      <StartTrackNow />
       <Footer />
     </>
   );

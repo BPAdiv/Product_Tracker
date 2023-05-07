@@ -78,7 +78,7 @@ export default function EnterProduct({
         {isLoading ? (
           <div>
             <h1 className="font-bold text-xl text-center">Scanning...</h1>
-            <img src={Searching} alt="" />
+            <img loading="lazy" src={Searching} alt="" />
           </div>
         ) : (
           <form

@@ -25,6 +25,7 @@ export default function ConnectTelegram() {
         >
           <div className="lg:w-1/2   flex items-center justify-center ">
             <img
+              loading="lazy"
               src={telegramIlu}
               alt="Envelope with a newsletter"
               role="img"

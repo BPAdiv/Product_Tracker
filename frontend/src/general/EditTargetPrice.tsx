@@ -56,7 +56,7 @@ export default function EditTargetPrice({ product }: Product) {
         type="button"
         onClick={() => (user ? setShowModal(true) : setIsLogin(true))}
       >
-        <img className="w-8 h-8" src={editIcon} alt="" />
+        <img loading="lazy" className="w-8 h-8" src={editIcon} alt="" />
       </button>
       {showModal ? (
         <>
@@ -75,6 +75,7 @@ export default function EditTargetPrice({ product }: Product) {
                 {/*header*/}
                 <div className="flex items-center justify-center p-5 border-b border-solid border-slate-200 rounded-t">
                   <img
+                    loading="lazy"
                     className="max-h-96 max-md:max-h-40 object-contain"
                     src={product.image}
                     alt=""

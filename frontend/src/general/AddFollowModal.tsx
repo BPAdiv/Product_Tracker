@@ -68,7 +68,7 @@ export default function AddFollowModal({ product }: Product) {
         type="button"
         onClick={() => (user ? setShowModal(true) : setIsLogin(true))}
       >
-        <img className="w-8 h-8" src={addIcon} alt="" />
+        <img loading="lazy" className="w-8 h-8" src={addIcon} alt="" />
       </button>
 
       {showModal ? (
@@ -87,7 +87,7 @@ export default function AddFollowModal({ product }: Product) {
                 </div>
                 {/*header*/}
                 <div className="flex items-center justify-center p-5 border-b border-solid border-slate-200 rounded-t">
-                  <img src={product.image} alt="" />
+                  <img loading="lazy" src={product.image} alt="" />
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">

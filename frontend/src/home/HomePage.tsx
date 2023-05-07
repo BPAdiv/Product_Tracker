@@ -17,6 +17,7 @@ import TourGuideProvider, {
   TourGuideContext,
 } from "../contexts/tourGuideContext";
 import Cookies from "universal-cookie";
+import QuickTrack from "./components/QuickTrack";
 
 const HomePage = () => {
   const { user, setUser } = useContext(UserContext);
@@ -210,6 +211,7 @@ const HomePage = () => {
         // }}
       />
       <HeroSection />
+      <QuickTrack />
       <div className="mx-[5vw] ">
         {!allProducts ? (
           <Loading />

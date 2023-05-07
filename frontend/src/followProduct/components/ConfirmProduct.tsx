@@ -22,6 +22,7 @@ export default function ConfirmProduct(props: IConfirmProductProps) {
         </div>
         <div className="mb-5">
           <img
+            loading="lazy"
             className="object-contain w-full h-full max-h-96"
             src={Confirmed}
             alt=""

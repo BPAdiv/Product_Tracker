@@ -16,10 +16,13 @@ import Cookies from "universal-cookie";
 export default function FollowProductPage() {
   const { user, setUser } = useContext(UserContext);
   const [isLogin, setIsLogin] = useState(false);
+  const [token, setToken] = useState("");
   const { trackProductTour, setTrackProductTour } =
     useContext(TourGuideContext);
 
   useEffect(() => {
+    const token = cookies.get("token");
+    setToken(token);
     if (!cookies.get("usedHomeTour"))
       return setTrackProductTour({ ...trackProductTour, run: true });
     const usedtrackProductTour = cookies.get("usedTrackProductTour");
@@ -133,7 +136,11 @@ export default function FollowProductPage() {
       ) : (
         <>
           <Loading />
-          <NeedToLogin isLogin={isLogin} setIsLogin={setIsLogin} />
+          {!token ? (
+            <NeedToLogin isLogin={isLogin} setIsLogin={setIsLogin} followPage />
+          ) : (
+            ""
+          )}
         </>
       )}
       <Footer />

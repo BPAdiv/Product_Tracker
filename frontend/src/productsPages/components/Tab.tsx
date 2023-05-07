@@ -35,6 +35,7 @@ export default function Tab({
            group`}
       >
         <img
+          loading="lazy"
           src={imgSrc}
           className="w-5 h-5 mr-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
         ></img>

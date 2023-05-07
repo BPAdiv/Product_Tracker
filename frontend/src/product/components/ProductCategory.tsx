@@ -15,7 +15,7 @@ export default function ProductCategory({
         Related Products
       </h1>
       <div className="grid   justify-items-center  grid-cols-2 md:grid-cols-4 lg:grid-cols-5 mt-3  gap-5">
-        {sameCategory?.map((pro, i) => {
+        {sameCategory?.slice(0, 10).map((pro, i) => {
           return <Card key={i} product={pro} />;
         })}
       </div>

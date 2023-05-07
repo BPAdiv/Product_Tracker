@@ -21,8 +21,9 @@ export default function NavBar() {
       <div>
         <nav className="bg-white border-gray-200 ">
           <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xxl px-4 md:px-6 py-2.5">
-            <a href="/" className="flex items-center step-1">
+            <a href="/" className="flex items-center step-1 max-sm:mb-3">
               <img
+                loading="lazy"
                 src={bargainHiveLogo}
                 className="h-6 mr-3 sm:h-9"
                 alt="Flowbite Logo"

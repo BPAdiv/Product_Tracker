@@ -68,7 +68,7 @@ export default function CardCarusel({ products }: Product) {
   //   const items = [
   //     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
   //       <a href="#">
-  //         <img
+  //         <img loading="lazy"
   //           className="p-8 rounded-t-lg"
   //           src="/docs/images/products/apple-watch.png"
   //           alt="product image"
@@ -150,7 +150,7 @@ export default function CardCarusel({ products }: Product) {
   //     </div>,
   //     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
   //       <a href="#">
-  //         <img
+  //         <img loading="lazy"
   //           className="p-8 rounded-t-lg"
   //           src="/docs/images/products/apple-watch.png"
   //           alt="product image"
@@ -232,7 +232,7 @@ export default function CardCarusel({ products }: Product) {
   //     </div>,
   //     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
   //       <a href="#">
-  //         <img
+  //         <img loading="lazy"
   //           className="p-8 rounded-t-lg"
   //           src="/docs/images/products/apple-watch.png"
   //           alt="product image"
@@ -314,7 +314,7 @@ export default function CardCarusel({ products }: Product) {
   //     </div>,
   //     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
   //       <a href="#">
-  //         <img
+  //         <img loading="lazy"
   //           className="p-8 rounded-t-lg"
   //           src="/docs/images/products/apple-watch.png"
   //           alt="product image"
@@ -396,7 +396,7 @@ export default function CardCarusel({ products }: Product) {
   //     </div>,
   //     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
   //       <a href="#">
-  //         <img
+  //         <img loading="lazy"
   //           className="p-8 rounded-t-lg"
   //           src="/docs/images/products/apple-watch.png"
   //           alt="product image"
@@ -490,7 +490,7 @@ export default function CardCarusel({ products }: Product) {
       </div>
       {/* <div className="flex items-center justify-around">
         <div className="px-5 ">
-          <img
+          <img loading="lazy"
             className="cursor-pointer min-w-fit"
             src={Prev}
             alt=""
@@ -510,7 +510,7 @@ export default function CardCarusel({ products }: Product) {
           />
         </div>
         <div className="px-5">
-          <img
+          <img loading="lazy"
             className="cursor-pointer min-w-fit"
             src={Next}
             alt=""

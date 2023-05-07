@@ -10,6 +10,7 @@ export default function AboutUs(props: IAboutUsProps) {
           <div className="grow-0 shrink-0  basis-auto w-full lg:w-5/12 mb-12 lg:mb-0">
             <div className="flex lg:py-12  ">
               <img
+                loading="lazy"
                 src={lifeStyleimg}
                 className="w-full bg-white rounded-lg shadow-lg lg:z-10 lg:ml-14"
                 alt=""
