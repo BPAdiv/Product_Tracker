@@ -10,8 +10,11 @@ import { useNavigate } from "react-router-dom";
 import { TourGuideContext } from "../contexts/tourGuideContext";
 import Cookies from "universal-cookie";
 import StartTrackNow from "./components/StartTrackNow";
-
+import ReactGA from "react-ga";
 export default function GetStartedPage() {
+  ReactGA.initialize(import.meta.env.VITE_GOOGLE_ANALYTICS_ID as string);
+
+  ReactGA.pageview(window.location.pathname + window.location.search);
   useAuth();
   const { homeTour, setHomeTour } = React.useContext(TourGuideContext);
   const navigate = useNavigate();

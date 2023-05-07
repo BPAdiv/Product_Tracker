@@ -21,6 +21,7 @@ import QuickTrack from "./components/QuickTrack";
 import ReactGA from "react-ga";
 const HomePage = () => {
   ReactGA.initialize(import.meta.env.VITE_GOOGLE_ANALYTICS_ID as string);
+
   ReactGA.pageview(window.location.pathname + window.location.search);
 
   const { user, setUser } = useContext(UserContext);

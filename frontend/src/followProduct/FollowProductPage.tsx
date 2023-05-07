@@ -13,7 +13,11 @@ import Cookies from "universal-cookie";
 
 // export interface IAppProps {}
 
+import ReactGA from "react-ga";
 export default function FollowProductPage() {
+  ReactGA.initialize(import.meta.env.VITE_GOOGLE_ANALYTICS_ID as string);
+
+  ReactGA.pageview(window.location.pathname + window.location.search);
   const { user, setUser } = useContext(UserContext);
   const [isLogin, setIsLogin] = useState(false);
   const [token, setToken] = useState("");

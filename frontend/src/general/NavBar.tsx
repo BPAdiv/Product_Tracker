@@ -6,7 +6,11 @@ import { useAuth } from "../hooks/useAuth";
 // export interface INavBarProps {
 // }
 
+import ReactGA from "react-ga";
 export default function NavBar() {
+  ReactGA.initialize(import.meta.env.VITE_GOOGLE_ANALYTICS_ID as string);
+
+  ReactGA.pageview(window.location.pathname + window.location.search);
   const { user } = useContext(UserContext);
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (e.currentTarget.pathname === window.location.pathname) {
