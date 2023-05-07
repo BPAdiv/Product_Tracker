@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function QuickTrack() {
   const navigate = useNavigate();
   return (
-    <div className="2xl:mx-auto 2xl:container mx-4 py-16">
+    <div className="mx-[5vw] py-16">
       <div className=" w-full  relative flex items-center justify-center object-[50% 100%]">
         <img
           loading="lazy"
