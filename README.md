@@ -6,6 +6,20 @@ In addition, users can view what other users are tracking and how many are watch
 
 Bargain's backend is split into two parts: one for handling website requests and the other for scanning and Telegram notifications. This separation improves the efficiency of the system.
 
+## Features
+
+- **Add a product and set a target price:** Users can search for a product they want to buy on Amazon and add it to their watchlist on Bargain. They can then set a target price for the product, which is the price they are willing to pay for it.
+
+- **Get notified when the price drops:** Bargain will monitor the product's price on Amazon and send the user a notification via email or Telegram when the product's price drops below their target price.
+
+- **View what others are tracking:** Users can view a list of products that other users are tracking, along with the number of people who are watching each product.
+
+- **View single product details:** Users can view detailed information about a specific product, including its current price and historical price trends.
+
+- **Manage your watchlist:** Users can manage their watchlist by editing or removing products, or viewing their past notifications.
+
+- **Telegram bot integration:** Users can access a Telegram bot that allows them to add, remove, and view products on their watchlist directly from the Telegram app.
+
 ## Technologies Used
 
 Bargain is built using the following technologies:
