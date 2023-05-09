@@ -89,7 +89,7 @@ const UserPage = () => {
   return (
     <>
       <div className="m-[5vw] ">
-        <UserHeading />
+        {/* <UserHeading /> */}
 
         <UserNewProduct />
         <div className="flex justify-between items-end border-b py-3 mb-5">
