@@ -1,4 +1,6 @@
-# Bargain
+# Bargain Hive
+
+https://bargainhive.netlify.app/
 
 Bargain is a website designed to help you save money when buying products on Amazon. Users can add a product of their choice and set a target price. When the product's current price drops below the target price, the user receives a notification via email or Telegram with the Amazon link.
 
